@@ -59,6 +59,12 @@ final class App
 
         $this->router->get('/users/add', [UserController::class, 'add']);
         $this->router->post('/users', [UserController::class, 'create']);
+
+        $this->router->get('/', [UserController::class, 'index']);
+
+        $this->router->get('/home', [UserController::class, 'index']);
+
+        $this->router->get('/login', [UserController::class, 'login']);
     }
 
 

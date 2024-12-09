@@ -6,6 +6,12 @@ use Symplefony\Model\Entity;
 
 class User extends Entity
 {
+    protected int $id;
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
     protected string $password;
     public function getPassword(): string
     {

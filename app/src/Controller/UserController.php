@@ -35,4 +35,14 @@ class UserController extends Controller
         }
         $this->redirect('/users');
     }
+
+    public function index(): void
+    {
+        $view = new View('page:home');
+        $data = [
+            'title' => 'Accueil - Airbnb.com',
+            'users' => RepoManager::getRM()->getUserRepo()->getAll()
+        ];
+        $view->render($data);
+    }
 }
