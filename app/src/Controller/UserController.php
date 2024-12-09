@@ -45,4 +45,23 @@ class UserController extends Controller
         ];
         $view->render($data);
     }
+
+    public function login(): void
+    {
+        $view = new View('user:login');
+        $data = [
+            'title' => 'Connexion - Airbnb.com'
+        ];
+        $view->render($data);
+    }
+
+    public function profile(): void
+    {
+        $view = new View('user:profile');
+        $data = [
+            'title' => 'Mon profil - Airbnb.com',
+
+        ];
+        $view->render($data);
+    }
 }
