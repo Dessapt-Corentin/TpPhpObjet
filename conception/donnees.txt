@@ -1,0 +1,45 @@
+Equipements : "equipments"
+- id  
+- label 
+
+Biens loués : "accommodations"
+- id
+- adresse_id  
+- price
+- id_type
+- size 
+- description text
+- beds
+- owner_id
+- image 
+
+Clients/Loueurs : "users" 
+- id
+- email 
+- password
+- firstname 
+- lastname 
+- phone_number 
+- role bool
+
+Locations : "rentals" 
+- id
+- user_id
+- accommodation_id
+- date_start 
+- date_end 
+
+Types de biens : "types_accommodations"
+- id 
+- type_accomodation 
+
+Adresse des biens : "adress" 
+- id 
+- country 
+- city 
+- adress 
+- postal_code 
+
+Equipements des biens : "accommodations_equipments"
+- accommodation_id
+- equipment_id

@@ -1,0 +1,23 @@
+Airbnb est une application de location de bien entre particuliers .
+Les fonctionnalités souhaitées sont les suivantes :
+-- Nous avons deux types d'utilisateurs : 
+- La personne souhaitant louer "un" bien ,
+- La personne souhaitant louer "son" bien
+
+
+-- Le client peut : 
+- Voire la liste des biens ,
+- Louer un bien à la journée avec une date de début et une date de fin ,
+- Voire la liste de ses réservations 
+
+-- Le loueur peut :
+- Ajouter une chambre avec des détails décrivant le bien:
+            - Adresse (pays, ville, ...)
+            - Prix
+            - Type de logement (logement entier, chambre privée, ...)
+            - Taille
+            - Description
+            - Equipements(grille pain, machine à laver...)
+            - Couchages (nbre)
+- Voir ses annonces déjà postée, les modifier , les supprimer
+- Voir la liste des réservations de ses biens 
