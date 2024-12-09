@@ -7,6 +7,7 @@
 // Déclaration du namespace de ce fichier
 namespace App;
 
+use App\Controller\UserController;
 use Exception;
 use Throwable;
 
@@ -55,7 +56,12 @@ final class App
     private function registerRoutes(): void
     {
         $this->router->pattern('id', '\d+');
+
+        $this->router->get('/users/add', [UserController::class, 'add']);
+        $this->router->post('/users', [UserController::class, 'create']);
     }
+
+
 
     // Démarrage du routeur
     private function startRouter(): void
