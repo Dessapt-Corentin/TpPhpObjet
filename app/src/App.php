@@ -7,6 +7,7 @@
 // Déclaration du namespace de ce fichier
 namespace App;
 
+use App\Controller\AccommodationController;
 use App\Controller\PageController;
 use App\Controller\UserController;
 use Exception;
@@ -70,6 +71,8 @@ final class App
         $this->router->post('/users/login', [UserController::class, 'log']);
 
         $this->router->get('/', [PageController::class, 'index']);
+
+        $this->router->get('/users/addlocation', [AccommodationController::class, 'add']);
     }
 
     // Démarrage du routeur

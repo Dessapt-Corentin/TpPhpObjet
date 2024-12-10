@@ -57,11 +57,11 @@ class Accommodation extends Entity
     }
 
     protected string $descripton = '';
-    public function getDescripton(): string
+    public function getDescription(): string
     {
         return $this->descripton;
     }
-    public function setDescripton(int $value): self
+    public function setDescription(int $value): self
     {
         $this->descripton = $value;
         return $this;
