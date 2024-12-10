@@ -4,11 +4,9 @@ namespace App\Controller;
 
 use App\Model\Entity\User;
 use App\Model\Repository\RepoManager;
-use App\Model\Session;
 use Laminas\Diactoros\ServerRequest;
 use Symplefony\Controller;
 use Symplefony\View;
-use App\Model\UserModel;
 
 class UserController extends Controller
 {
@@ -55,6 +53,13 @@ class UserController extends Controller
         ];
         $view->render($data);
     }
+
+    public function log(ServerRequest $request): void
+    {
+        $user_data = $request->getParsedBody();
+        var_dump($user_data);
+    }
+
 
     public function profil(): void
     {

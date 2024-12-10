@@ -59,11 +59,14 @@ final class App
         $this->router->pattern('id', '\d+');
 
         $this->router->get('/', [PageController::class, 'index']);
+
+        // Gestion de la création d'un compte
         $this->router->get('/users/add', [UserController::class, 'add']);
+        $this->router->post('/users/add', [UserController::class, 'create']);
 
-        $this->router->post('/users', [UserController::class, 'create']);
-
+        // Gestion de la connexion
         $this->router->get('/users/login', [UserController::class, 'login']);
+        $this->router->post('/users/login', [UserController::class, 'log']);
     }
 
     // Démarrage du routeur

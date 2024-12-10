@@ -34,7 +34,7 @@ class User extends Entity
         return $this;
     }
 
-    protected string $firstname = '';
+    protected string $firstname;
     public function getFirstname(): string
     {
         return $this->firstname;
@@ -45,7 +45,7 @@ class User extends Entity
         return $this;
     }
 
-    protected string $lastname = '';
+    protected string $lastname;
     public function getLastname(): string
     {
         return $this->lastname;
@@ -56,7 +56,7 @@ class User extends Entity
         return $this;
     }
 
-    protected string $phone_number = '';
+    protected string $phone_number;
     public function getPhoneNumber(): string
     {
         return $this->phone_number;
@@ -67,7 +67,7 @@ class User extends Entity
         return $this;
     }
 
-    protected ?string $role = '';
+    protected string $role;
     public function getRole(): string
     {
         return $this->role;
