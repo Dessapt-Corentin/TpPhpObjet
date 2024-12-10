@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo docker exec mariadb_poo /root/backup.sh
+docker exec mariadb /root/backup.sh

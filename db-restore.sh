@@ -1,2 +1,2 @@
 #!/bin/bash
-docker exec mariadb_poo /root/restore.sh
+docker exec mariadb /root/restore.sh
