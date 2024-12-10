@@ -46,8 +46,6 @@ class View
             $title = 'TITRE PAR DEFAULT';
         }
 
-        session_start();
-
         // Démarrage du cache de réponse
         ob_start();
 

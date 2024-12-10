@@ -5,6 +5,7 @@ namespace App\Model\Repository;
 use Symplefony\Model\Repository;
 
 use App\Model\Entity\User;
+use PDO;
 
 class UserRepository extends Repository
 {
@@ -65,5 +66,63 @@ class UserRepository extends Repository
     public function getById(int $id): ?User
     {
         return $this->readById(User::class, $id);
+    }
+
+    public function login(string $email, string $password): ?User
+    {
+        $query = sprintf(
+            'SELECT * FROM `%s` WHERE `email` = :email',
+            $this->getTableName()
+        );
+
+        $sth = $this->pdo->prepare($query);
+
+        // Si la préparation échoue
+        if (! $sth) {
+            return null;
+        }
+
+        $sth->execute(['email' => $email]);
+
+        $user = $sth->fetchObject(User::class);
+
+        // Si l'email n'existe pas
+        if (! $user) {
+            return null;
+        }
+
+        // Si le mot de passe ne correspond pas
+        if (! password_verify($password, $user->getPassword())) {
+            return null;
+        }
+
+        return $user;
+    }
+
+    public function getByEmail(string $email): ?User
+    {
+        $query = sprintf(
+            'SELECT * FROM `%s` WHERE email = :email',
+            $this->getTableName()
+        );
+
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute(['email' => $email]);
+
+        $user_data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user_data) {
+            $user = new User();
+            $user->setId($user_data['id']);
+            $user->setEmail($user_data['email']);
+            $user->setPassword($user_data['password']); // Haché
+            $user->setFirstname($user_data['firstname']);
+            return $user;
+        }
+
+        return null; // L'utilisateur n'a pas été trouvé
+        $user = $repo->getByEmail($user_data['email']);
+        var_dump($user);
+        exit();
     }
 }

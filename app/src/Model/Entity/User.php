@@ -17,9 +17,9 @@ class User extends Entity
     {
         return $this->password;
     }
-    public function setPassword(string $value): self
+    public function setPassword(string $password): self
     {
-        $this->password = password_hash($value, PASSWORD_DEFAULT);
+        $this->password = password_hash($password, PASSWORD_DEFAULT);
         return $this; // Permet de "chaîner" les appels aux setters: $toto->setId(2)->setName('toto'), etc.
     }
 
@@ -28,9 +28,9 @@ class User extends Entity
     {
         return $this->email;
     }
-    public function setEmail(int $value): self
+    public function setEmail(string $email): self
     {
-        $this->email = $value;
+        $this->email = $email;
         return $this;
     }
 
@@ -39,9 +39,9 @@ class User extends Entity
     {
         return $this->firstname;
     }
-    public function setFirstname(int $value): self
+    public function setFirstname(string $firstname): self
     {
-        $this->firstname = $value;
+        $this->firstname = $firstname;
         return $this;
     }
 
@@ -50,9 +50,9 @@ class User extends Entity
     {
         return $this->lastname;
     }
-    public function setLastname(int $value): self
+    public function setLastname(string $lastname): self
     {
-        $this->lastname = $value;
+        $this->lastname = $lastname;
         return $this;
     }
 

@@ -43,6 +43,7 @@ final class App
     // Démarrage de l'application
     public function start(): void
     {
+        session_start();
         $this->registerRoutes();
         $this->startRouter();
     }
@@ -67,6 +68,8 @@ final class App
         // Gestion de la connexion
         $this->router->get('/users/login', [UserController::class, 'login']);
         $this->router->post('/users/login', [UserController::class, 'log']);
+
+        $this->router->get('/', [PageController::class, 'index']);
     }
 
     // Démarrage du routeur

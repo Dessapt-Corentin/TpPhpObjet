@@ -5,6 +5,16 @@
 </ul>
 
 <h2> Locations </h2>
+<?php
+// Vérifie que la session contient bien les données
+if (isset($_SESSION['firstname'])) {
+    $firstname = $_SESSION['firstname'];
+} else {
+    $firstname = ''; // Valeur par défaut si la clé n'est pas présente
+}
+
+?>
+<p>Bonjour <?php echo htmlspecialchars($firstname); ?></p>
 <div class="card" style="width: 18rem;">
     <?php if (!empty($accommodations)) : ?>
         <ul>

@@ -54,12 +54,11 @@ class UserController extends Controller
         $view->render($data);
     }
 
-    public function log(ServerRequest $request): void
+    public function logout(): void
     {
-        $user_data = $request->getParsedBody();
-        var_dump($user_data);
+        session_destroy();
+        $this->redirect('/');
     }
-
 
     public function profil(): void
     {
@@ -69,5 +68,68 @@ class UserController extends Controller
 
         ];
         $view->render($data);
+    }
+
+    /**
+     * Méthode(fonction) qui permet de sécuriser les données reçues par un formulaire
+     * @param string $data
+     * @return string
+     */
+    function secureData($data): string
+    {
+        return htmlspecialchars(stripslashes(trim($data)));
+    }
+
+    /**
+     * methode qui verifie le format de l'email
+     * @param string $email
+     * @return bool
+     */
+    function validEmail(string $email): bool
+    {
+        return filter_var($email, FILTER_VALIDATE_EMAIL);
+    }
+
+    /**
+     * methode qui verifie le format du mot de passe (au moins 8 caractères, une majuscule, une minuscule, un chiffre)
+     * @param string $email
+     * @return bool
+     */
+    function validPassword(string $password): bool
+    {
+        return preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/', $password);
+    }
+
+    public function log(ServerRequest $request): void
+    {
+        // Récupérer les données du formulaire
+        $user_data = $request->getParsedBody();
+
+        // Vérifier si les données sont présentes
+        if (isset($user_data['email']) && isset($user_data['password'])) {
+            // Charger le repository de l'utilisateur
+            $repo = RepoManager::getRM()->getUserRepo();
+
+            // Récupérer l'utilisateur par email
+            $user = $repo->getByEmail($user_data['email']);
+
+            // Vérifier si l'utilisateur existe et si le mot de passe est correct
+            if ($user && password_verify($user_data['password'], $user->getPassword())) {
+                // Si la connexion est réussie, l'utilisateur est authentifié
+                // Stocker les informations utilisateur dans la session
+                $_SESSION['id'] = $user->getId();  // Stocke l'ID de l'utilisateur dans la session
+                $_SESSION['email'] = $user->getEmail();  // Stocke l'email de l'utilisateur dans la session
+                $_SESSION['firstname'] = $user->getFirstname();  // Stocke le prénom de l'utilisateur
+
+                // Rediriger l'utilisateur vers la page d'accueil 
+                $this->redirect('/');
+            } else {
+                // Si l'utilisateur n'existe pas ou le mot de passe est incorrect
+                echo "Email ou mot de passe incorrect.";
+            }
+        } else {
+            // Si les champs sont vides
+            echo "Veuillez remplir tous les champs.";
+        }
     }
 }
