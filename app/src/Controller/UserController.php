@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Model\Entity\User;
 use App\Model\Repository\RepoManager;
+use App\Model\Session;
 use Laminas\Diactoros\ServerRequest;
 use Symplefony\Controller;
 use Symplefony\View;
@@ -55,9 +56,9 @@ class UserController extends Controller
         $view->render($data);
     }
 
-    public function profile(): void
+    public function profil(): void
     {
-        $view = new View('user:profile');
+        $view = new View('user:profil');
         $data = [
             'title' => 'Mon profil - Airbnb.com',
 

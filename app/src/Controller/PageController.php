@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Model\Repository\RepoManager;
 use Symplefony\View;
 
 use Symplefony\Controller;
@@ -12,17 +13,13 @@ class PageController extends Controller
     public function index(): void
     {
         $view = new View('page:home');
+        $accommodations = RepoManager::getRM()->getAccommodationRepo()->getAll();
 
         $data = [
             'title' => 'Accueil - Airbnb.com',
+            'accommodations' => $accommodations
         ];
 
         $view->render($data);
-    }
-
-    // Page de mentions légales
-    public function legalMentions(): void
-    {
-        echo 'Mentions légales depuis le controller';
     }
 }

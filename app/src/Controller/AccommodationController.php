@@ -9,7 +9,7 @@ use Symplefony\View;
 class AccommodationController extends Controller
 {
     // Biens: Liste
-    public function index(): void
+    public function list(): void
     {
         $view = new View('accommodation:admin:accommodation');
         $data = [

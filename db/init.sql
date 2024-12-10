@@ -35,7 +35,7 @@ CREATE TABLE `rentals` (
 
 CREATE TABLE `types_accommodations` (
     `id` int PRIMARY KEY AUTO_INCREMENT,
-    `type_accomodation` int
+    `type_accommodation` int
 );
 
 CREATE TABLE `adresses` (

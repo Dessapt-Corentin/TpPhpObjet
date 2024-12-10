@@ -9,7 +9,7 @@ class AccommodationRepository extends Repository
 {
     protected function getTableName(): string
     {
-        return 'accomodations';
+        return 'accommodations';
     }
 
     /* Crud: Create */

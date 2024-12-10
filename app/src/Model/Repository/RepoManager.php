@@ -29,5 +29,6 @@ class RepoManager
         $pdo = Database::getPDO();
 
         $this->user_repository = new UserRepository($pdo);
+        $this->accommodation_repository = new AccommodationRepository($pdo);
     }
 }

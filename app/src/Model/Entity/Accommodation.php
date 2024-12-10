@@ -56,7 +56,7 @@ class Accommodation extends Entity
         return $this;
     }
 
-    protected string $descripton;
+    protected string $descripton = '';
     public function getDescripton(): string
     {
         return $this->descripton;
@@ -89,8 +89,8 @@ class Accommodation extends Entity
         return $this;
     }
 
-    protected string $image;
-    public function getImage(): string
+    protected ?string $image = null;
+    public function getImage(): ?string
     {
         return $this->image;
     }

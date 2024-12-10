@@ -7,6 +7,7 @@
 // Déclaration du namespace de ce fichier
 namespace App;
 
+use App\Controller\PageController;
 use App\Controller\UserController;
 use Exception;
 use Throwable;
@@ -57,17 +58,13 @@ final class App
     {
         $this->router->pattern('id', '\d+');
 
+        $this->router->get('/', [PageController::class, 'index']);
         $this->router->get('/users/add', [UserController::class, 'add']);
+
         $this->router->post('/users', [UserController::class, 'create']);
 
-        $this->router->get('/', [UserController::class, 'index']);
-
-        $this->router->get('/home', [UserController::class, 'index']);
-
-        $this->router->get('/login', [UserController::class, 'login']);
+        $this->router->get('/users/login', [UserController::class, 'login']);
     }
-
-
 
     // Démarrage du routeur
     private function startRouter(): void

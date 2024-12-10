@@ -31,7 +31,7 @@ Locations : "rentals"
 
 Types de biens : "types_accommodations"
 - id 
-- type_accomodation 
+- type_accommodation 
 
 Adresse des biens : "adress" 
 - id 
