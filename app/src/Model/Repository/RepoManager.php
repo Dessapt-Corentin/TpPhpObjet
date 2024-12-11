@@ -29,7 +29,7 @@ class RepoManager
         return $this->accommodation_repository;
     }
 
-    public function getAccommodationTypeRepo(): TypeAccommodationRepository
+    public function getTypeAccommodationRepo(): TypeAccommodationRepository
     {
         return $this->type_accommodation;
     }

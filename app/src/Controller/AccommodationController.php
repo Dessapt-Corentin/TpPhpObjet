@@ -14,7 +14,7 @@ class AccommodationController extends Controller
     public function add(): void
     {
         $view = new View('user:create-accommodation');
-        $type_accommodation = RepoManager::getRM()->getAccommodationTypeRepo()->getAll();
+        $type_accommodation = RepoManager::getRM()->getTypeAccommodationRepo()->getAll();
         $data = [
             'title' => 'Ajouter un bien',
             'types_accommodations' => $type_accommodation

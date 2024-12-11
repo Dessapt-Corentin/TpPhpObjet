@@ -27,7 +27,7 @@
         <select name="id_type" id="select-id_type">
             <option value="">Choisissez...</option>
             <!-- Insertion des éléments des équipements -->
-            <?php foreach ($types_accommodations  as $type) : ?>
+            <?php foreach ($types  as $type) : ?>
                 <option value="<?= $type->getId() ?>"><?= $type->getTypeAccommodation() ?></option>
             <?php endforeach; ?>
         </select>
