@@ -12,6 +12,17 @@ class Accommodation extends Entity
         return $this->id;
     }
 
+    protected int $lastInsertId;
+    public function getLastInsertId(): int
+    {
+        return $this->lastInsertId;
+    }
+    public function setLastInsertId(int $value): self
+    {
+        $this->lastInsertId = $value;
+        return $this;
+    }
+
     protected int $adresse_id;
     public function getAdresseId(): int
     {
@@ -56,14 +67,14 @@ class Accommodation extends Entity
         return $this;
     }
 
-    protected string $descripton = '';
+    protected string $description = '';
     public function getDescription(): string
     {
-        return $this->descripton;
+        return $this->description;
     }
-    public function setDescription(int $value): self
+    public function setDescription(string $value): self
     {
-        $this->descripton = $value;
+        $this->description = $value;
         return $this;
     }
 
@@ -94,9 +105,16 @@ class Accommodation extends Entity
     {
         return $this->image;
     }
-    public function setImage(int $value): self
+    public function setImage(?string $value): self
     {
         $this->image = $value;
         return $this;
+    }
+
+    public function toArray(): array
+
+    {
+
+        return get_object_vars($this);
     }
 }

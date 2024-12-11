@@ -32,7 +32,7 @@ class UserController extends Controller
             // TODO: gérer une erreur
             $this->redirect('/users/add');
         }
-        $this->redirect('/users');
+        $this->redirect('/');
     }
 
     public function index(): void

@@ -12,15 +12,15 @@ class TypeAccommodation extends Entity
         return $this->id;
     }
 
-    protected int $type_accommodation;
-    public function getTypeAccommodation(): int
+    protected string $type_accommodation;
+    public function getTypeAccommodation()
     {
         return $this->type_accommodation;
     }
 
-    public function setTypeAccommodation(int $value): self
+    public function setTypeAccommodation($type_accommodation)
     {
-        $this->type_accommodation = $value;
+        $this->type_accommodation = $type_accommodation;
         return $this;
     }
 }

@@ -1,5 +1,6 @@
 <h1>Ajouter une location</h1>
-<form action="" method="post" novalidate>
+<form action="/users/addaccommodation" method="post" novalidate>
+    <input type="hidden" name="owner_id" value="<?php echo $_SESSION["id"] ?>">
     <div>
         <label for="input-country">Pays :</label>
         <input type="text" name="country" id="input-country">
@@ -10,7 +11,7 @@
     </div>
     <div>
         <label for="input-adress">Adresse postale :</label>
-        <input type="number" name="adress" id="input-adress">
+        <input type="text" name="adress" id="input-adress">
     </div>
     <div>
         <label for="input-postal_code">Code postal :</label>
@@ -20,9 +21,16 @@
         <label for="input-price">Prix :</label>
         <input type="number" name="price" id="input-price">
     </div>
+    <!-- Insérer une liste déroulante pour sélectionner 1 seule choix récupéré depuis la table "accommodations_types" -->
     <div>
-        <label for="input-id_type">Type de bien :</label>
-        <input type="texte" name="id_type" id="input-id_type">
+        <label for="select-id_type">Type de bien :</label>
+        <select name="id_type" id="select-id_type">
+            <option value="">Choisissez...</option>
+            <!-- Insertion des éléments des équipements -->
+            <?php foreach ($types_accommodations  as $type) : ?>
+                <option value="<?= $type->getId() ?>"><?= $type->getTypeAccommodation() ?></option>
+            <?php endforeach; ?>
+        </select>
     </div>
     <div>
         <label for="input-size">Taille :</label>
@@ -36,12 +44,8 @@
         <label for="input-beds">Couchages :</label>
         <input type="number" name="beds" id="input-beds">
     </div>
-    <div>
-        <label for="input-owner_id">Propriétaire :</label>
-        <input type="Text" name="owner_id" id="input-owner_id">
-    </div>
     <label for="input-image">Image :</label>
-    <input type="image" name="image" id="input-image">
+    <input type="file" name="image" id="input-image">
     <div>
         <input type="submit" value="Ajouter">
     </div>

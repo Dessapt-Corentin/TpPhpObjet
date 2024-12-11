@@ -16,7 +16,8 @@ if (isset($_SESSION['firstname'])) {
 ?>
 <p>Bonjour <?php echo htmlspecialchars($firstname); ?></p>
 <div class="card" style="width: 18rem;">
-    <?php if (!empty($accommodations)) : ?>
+    <?php
+    if (!empty($accommodations)) : ?>
         <ul>
             <?php foreach ($accommodations as $accommodation): ?>
                 <li>

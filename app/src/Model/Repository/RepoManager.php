@@ -2,9 +2,10 @@
 
 namespace App\Model\Repository;
 
-use App\Model\Repository\AccommodationRepository;
 use Symplefony\Database;
 use Symplefony\Model\RepositoryManagerTrait;
+use App\Model\Repository\AccommodationRepository;
+use App\Model\Repository\AccommodationTypeRepository;
 
 class RepoManager
 {
@@ -13,6 +14,10 @@ class RepoManager
     private static ?self $instance = null;
     private UserRepository $user_repository;
     private AccommodationRepository $accommodation_repository;
+    private AccommodationTypeRepository $type_accommodation;
+    private AdresseRepository $adresse_repository;
+
+
 
     public function getUserRepo(): UserRepository
     {
@@ -24,11 +29,24 @@ class RepoManager
         return $this->accommodation_repository;
     }
 
+    public function getAccommodationTypeRepo(): AccommodationTypeRepository
+    {
+        return $this->type_accommodation;
+    }
+
+    public function getAdresseRepo(): AdresseRepository
+    {
+        return $this->adresse_repository;
+    }
+
+
     private function __construct()
     {
         $pdo = Database::getPDO();
 
         $this->user_repository = new UserRepository($pdo);
         $this->accommodation_repository = new AccommodationRepository($pdo);
+        $this->type_accommodation = new AccommodationTypeRepository($pdo);
+        $this->adresse_repository = new AdresseRepository($pdo);
     }
 }

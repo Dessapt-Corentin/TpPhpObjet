@@ -11,6 +11,11 @@ class User extends Entity
     {
         return $this->id;
     }
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+        return $this;
+    }
 
     protected string $password;
     public function getPassword(): string

@@ -14,7 +14,7 @@ Les fonctionnalités souhaitées sont les suivantes :
 - Ajouter une chambre avec des détails décrivant le bien:
             - Adresse (pays, ville, ...)
             - Prix
-            - Type de logement (logement entier, chambre privée, ...)
+            - Type de Accommodation (Accommodation entier, chambre privée, ...)
             - Taille
             - Description
             - Equipements(grille pain, machine à laver...)
