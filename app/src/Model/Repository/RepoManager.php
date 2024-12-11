@@ -5,7 +5,7 @@ namespace App\Model\Repository;
 use Symplefony\Database;
 use Symplefony\Model\RepositoryManagerTrait;
 use App\Model\Repository\AccommodationRepository;
-use App\Model\Repository\AccommodationTypeRepository;
+use App\Model\Repository\TypeAccommodationRepository;
 
 class RepoManager
 {
@@ -14,7 +14,7 @@ class RepoManager
     private static ?self $instance = null;
     private UserRepository $user_repository;
     private AccommodationRepository $accommodation_repository;
-    private AccommodationTypeRepository $type_accommodation;
+    private TypeAccommodationRepository $type_accommodation;
     private AdresseRepository $adresse_repository;
 
 
@@ -29,7 +29,7 @@ class RepoManager
         return $this->accommodation_repository;
     }
 
-    public function getAccommodationTypeRepo(): AccommodationTypeRepository
+    public function getAccommodationTypeRepo(): TypeAccommodationRepository
     {
         return $this->type_accommodation;
     }
@@ -46,7 +46,7 @@ class RepoManager
 
         $this->user_repository = new UserRepository($pdo);
         $this->accommodation_repository = new AccommodationRepository($pdo);
-        $this->type_accommodation = new AccommodationTypeRepository($pdo);
+        $this->type_accommodation = new TypeAccommodationRepository($pdo);
         $this->adresse_repository = new AdresseRepository($pdo);
     }
 }

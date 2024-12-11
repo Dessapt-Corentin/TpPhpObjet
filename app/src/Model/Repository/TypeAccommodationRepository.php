@@ -5,7 +5,7 @@ namespace App\Model\Repository;
 use App\Model\Entity\TypeAccommodation;
 use Symplefony\Model\Repository;
 
-class AccommodationTypeRepository extends Repository
+class TypeAccommodationRepository extends Repository
 {
     protected function getTableName(): string
     {
