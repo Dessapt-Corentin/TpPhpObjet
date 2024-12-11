@@ -1,0 +1,60 @@
+* {
+  box-sizing: border-box;
+  text-decoration: none;
+  color: #484848;
+}
+
+/* Styles généraux */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #484848;
+  background-color: #f7f7f7;
+  margin: 0;
+  padding: 0;
+}
+
+
+li {
+  list-style-type: none;
+  color: #484848;
+}
+
+ul {
+  padding: 0;
+  background-color:#f7f7f7;
+  color: #ffffff;
+}
+
+/* Titres */
+h1, h2, h3 {
+  color: #484848;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+label {
+  font-weight: bold;
+  color: #ffffff;
+}
+
+/* Formulaires */
+form {
+  background-color: #050024;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

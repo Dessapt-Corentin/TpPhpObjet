@@ -1,9 +1,29 @@
 <h1>Bienvenue sur Airbnb</h1>
-<ul>
-    <li><a href="/users/add">Créer un compte</a></li>
-    <li><a href="/users/login">Se connecter</a></li>
-</ul>
-
+<?php
+// On veux cacher le ul une fois connecté
+if (isset($_SESSION['firstname'])) {
+    $firstname = $_SESSION['firstname'];
+} else {
+    $firstname = ''; // Valeur par défaut si la clé n'est pas présente
+}
+if ($firstname == '') {
+?>
+    <ul>
+        <li><a href="/users/add">Créer un compte</a></li>
+        <li><a href="/users/login">Se connecter</a></li>
+    </ul>
+<?php
+} else {
+?>
+    <ul>
+        <li><a href="/profil">Mon profil</a></li>
+        <li><a href="/profil">Mes locations</a></li>
+        <li><a href="/biens">Mes biens</a></li>
+        <li><a href="/users/logout">Se déconnecter</a></li>
+    </ul>
+<?php
+}
+?>
 <h2> Locations </h2>
 <?php
 // Vérifie que la session contient bien les données
