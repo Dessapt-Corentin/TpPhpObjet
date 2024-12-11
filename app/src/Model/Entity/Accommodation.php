@@ -12,17 +12,6 @@ class Accommodation extends Entity
         return $this->id;
     }
 
-    protected int $lastInsertId;
-    public function getLastInsertId(): int
-    {
-        return $this->lastInsertId;
-    }
-    public function setLastInsertId(int $value): self
-    {
-        $this->lastInsertId = $value;
-        return $this;
-    }
-
     protected int $adresse_id;
     public function getAdresseId(): int
     {
