@@ -2,9 +2,7 @@
 
 namespace App\Model\Repository;
 
-use App\Controller\SessionController;
 use App\Model\Entity\Accommodation;
-use App\Model\Entity\Adresse;
 use PDO;
 use Symplefony\Model\Repository;
 
@@ -18,29 +16,6 @@ class AccommodationRepository extends Repository
     /* Crud: Create */
     public function create(array $accommodation): ?Accommodation
     {
-        // // 3. Gérer l'upload d'image
-        // $image_name = null;
-        // if (!empty($_FILES['image']['name'])) {
-        //     $image = $_FILES['image']['name'];
-        //     $format = $_FILES['image']['type'];
-        //     $tmp_name = $_FILES['image']['tmp_name'];
-        //     $dir_name = __DIR__ . '/../../../public/image/';
-
-        //     if (!in_array($format, ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'])) {
-        //         echo "Erreur : Format d'image non pris en charge.";
-        //         return null;
-        //     }
-
-        //     // Nom unique pour l'image
-        //     $image_name = uniqid() . '_' . $image;
-
-        //     if (!move_uploaded_file($tmp_name, $dir_name . $image_name)) {
-        //         echo "Erreur : Impossible de déplacer l'image.";
-        //         return null;
-        //     }
-        // }
-
-
         // 1. Insérer les données de accommodation dans la table accommodations
         $queryAccommodation = 'INSERT INTO accommodations (adresse_id, price, id_type,size,description,beds,owner_id)
         VALUES (:adresse_id, :price, :id_type, :size, :description, :beds, :owner_id)';
@@ -60,8 +35,48 @@ class AccommodationRepository extends Repository
     }
 
     // Récupérer un Accommodation par son ID
-    public function getById(int $id): ?Accommodation
+    public function getById(int $owner_id): ?Accommodation
     {
-        return $this->readById(Accommodation::class, $id);
+        return $this->readById(Accommodation::class, $owner_id);
+    }
+
+    // Récupérer les accommodations d'un seul utilisateur par son owner ID 
+    public function getByOwnerId(int $owner_id): array
+    {
+        // $query = 'SELECT * FROM accommodations WHERE owner_id = :owner_id';
+        // $stmt = $this->pdo->prepare($query);
+        // $stmt->execute(['owner_id' => $owner_id]);
+        // return $stmt->fetchAll(PDO::FETCH_CLASS, Accommodation::class);
+        $query = sprintf(
+            'SELECT * FROM `%s` WHERE owner_id=:owner_id',
+            $this->getTableName()
+        );
+
+        $sth = $this->pdo->prepare($query);
+
+        // Si la préparation échoue
+        if (! $sth) {
+            return null;
+        }
+
+        $success = $sth->execute(['owner_id' => $owner_id]);
+
+        // Si echec
+        if (! $success) {
+            return null;
+        }
+
+        // Récupération du premier résultat
+        $object_data = $sth->fetch();
+
+        // Récupération des résultats
+        $data = [];
+
+        while ($object_data = $sth->fetch()) {
+            $accommodation = new Accommodation($object_data);
+            $data[] = $accommodation;
+        }
+
+        return $data;
     }
 }

@@ -1,6 +1,5 @@
 <h1>Ajouter une location</h1>
-<form action="/users/addaccommodation" method="post" novalidate>
-    <input type="hidden" name="owner_id" value="<?php echo $_SESSION["id"] ?>">
+<form action="/" method="post" novalidate>
     <div>
         <label for="input-country">Pays :</label>
         <input type="text" name="country" id="input-country">
@@ -27,7 +26,7 @@
         <select name="id_type" id="select-id_type">
             <option value="">Choisissez...</option>
             <!-- Insertion des éléments des équipements -->
-            <?php foreach ($types  as $type) : ?>
+            <?php foreach ($types_accommodations  as $type) : ?>
                 <option value="<?= $type->getId() ?>"><?= $type->getTypeAccommodation() ?></option>
             <?php endforeach; ?>
         </select>

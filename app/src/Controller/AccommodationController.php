@@ -24,19 +24,6 @@ class AccommodationController extends Controller
     }
 
     // Biens: Création
-
-
-    // Biens: Liste
-    public function list(): void
-    {
-        $view = new View('accommodation');
-        $data = [
-            'title' => 'Liste des biens',
-            'accommodations' => RepoManager::getRM()->getAccommodationRepo()->getAll()
-        ];
-        $view->render($data);
-    }
-
     public function create(ServerRequest $request): void
     {
         $accommodation_data = $request->getParsedBody();
@@ -56,20 +43,22 @@ class AccommodationController extends Controller
             'size' => $accommodation_data['size'],
             'description' => $accommodation_data['description'],
             'beds' => $accommodation_data['beds'],
-            'owner_id' => $accommodation_data['owner_id']
+            'owner_id' => $_SESSION['user']->getId()
         ];
 
         RepoManager::getRM()->getAccommodationRepo()->create($data_accommodation);
+        $this->redirect('/');
+    }
 
-
-
-        // $accommodation = new Accommodation($accommodation_data);
-        // $user_id = $request->getAttribute('user_id'); // Assuming user_id is available in the request
-        // $accommodation->setId($user_id);
-        // $accommodation_created = RepoManager::getRM()->getAccommodationRepo()->create($accommodation->toArray());
-        // if (is_null($accommodation_created)) {
-        //     $this->redirect('/accommodations/add');
-        // }
-        // $this->redirect('/');
+    // Biens: Liste pour un utilisateur connecté
+    public function list($id): void
+    {
+        $view = new View('user:list-accommodation');
+        $accommodations = RepoManager::getRM()->getAccommodationRepo()->getByOwnerId($id);
+        $data = [
+            'title' => 'Mes biens',
+            'accommodations' => $accommodations
+        ];
+        $view->render($data);
     }
 }

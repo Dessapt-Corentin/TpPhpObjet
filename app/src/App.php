@@ -73,9 +73,9 @@ final class App
         $this->router->get('/', [PageController::class, 'index']);
 
         $this->router->get('/users/addaccommodation', [AccommodationController::class, 'add']);
-        $this->router->post('/users/addaccommodation', [AccommodationController::class, 'create']);
+        $this->router->post('/', [AccommodationController::class, 'create']);
 
-        
+        $this->router->get('/users/listaccomodation/{id}', [AccommodationController::class, 'list']);
     }
 
     // Démarrage du routeur

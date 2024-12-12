@@ -100,10 +100,14 @@ class Accommodation extends Entity
         return $this;
     }
 
-    public function toArray(): array
-
+    protected ?string $label = null;
+    public function getLabel(): ?string
     {
-
-        return get_object_vars($this);
+        return $this->label;
+    }
+    public function setLabel(?string $value): self
+    {
+        $this->label = $value;
+        return $this;
     }
 }

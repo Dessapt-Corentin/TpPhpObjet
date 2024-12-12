@@ -1,0 +1,37 @@
+<div>
+    <a href="/">🏠 Retour</a>
+</div>
+<h1>Mes annonces</h1>
+<p>
+    <a href="/users/addaccommodation">Ajouter une location</a>
+</p>
+
+
+<?php
+
+
+if (!empty($accommodations)): ?>
+    <ul>
+        <?php foreach ($accommodations as $accommodation): ?>
+            <li>
+                <ul>
+                    <li>id : <?php echo $accommodation->getId() ?></li>
+                    <li>adresse_id : <?php echo $accommodation->getAdresseId() ?></li>
+                    <li>price : <?php echo $accommodation->getPrice() ?></li>
+                    <li>id_type : <?php echo $accommodation->getIdType() ?></li>
+                    <li>size : <?php echo $accommodation->getSize() ?></li>
+                    <li>description : <?php echo $accommodation->getDescription() ?></li>
+                    <li>beds : <?php echo $accommodation->getBeds() ?></li>
+                    <li>owner_id : <?php echo $accommodation->getOwnerId() ?></li>
+                    <li>image : <?php echo $accommodation->getImage() ?> </li>
+                    <li><a href="users/rental">Louer</a></li>
+                </ul>
+            </li>
+        <?php endforeach ?>
+    </ul>
+<?php else: ?>
+    <div>Vous avez aucune annonce définie.</div>
+<?php endif ?>
+
+
+<?php

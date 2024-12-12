@@ -16,8 +16,9 @@ class RepoManager
     private AccommodationRepository $accommodation_repository;
     private TypeAccommodationRepository $type_accommodation;
     private AdresseRepository $adresse_repository;
-
-
+    private RentalRepository $rental_repository;
+    private EquipmentRepository $equipment_repository;
+    private AccommodationEquipmentRepository $accommodation_equipment_repository;
 
     public function getUserRepo(): UserRepository
     {
@@ -39,6 +40,20 @@ class RepoManager
         return $this->adresse_repository;
     }
 
+    public function getRentalRepo(): RentalRepository
+    {
+        return $this->rental_repository;
+    }
+
+    public function getEquipmentRepo(): EquipmentRepository
+    {
+        return $this->equipment_repository;
+    }
+
+    public function getAccommodationEquipmentRepo(): AccommodationEquipmentRepository
+    {
+        return $this->accommodation_equipment_repository;
+    }
 
     private function __construct()
     {
@@ -48,5 +63,8 @@ class RepoManager
         $this->accommodation_repository = new AccommodationRepository($pdo);
         $this->type_accommodation = new TypeAccommodationRepository($pdo);
         $this->adresse_repository = new AdresseRepository($pdo);
+        $this->rental_repository = new RentalRepository($pdo);
+        $this->equipment_repository = new EquipmentRepository($pdo);
+        $this->accommodation_equipment_repository = new AccommodationEquipmentRepository($pdo);
     }
 }

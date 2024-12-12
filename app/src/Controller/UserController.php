@@ -32,6 +32,10 @@ class UserController extends Controller
             // TODO: gérer une erreur
             $this->redirect('/users/add');
         }
+        // Ajout de l'utilisateur en session
+        $user_created->setPassword('');
+        $_SESSION['user'] = $user_created;
+
         $this->redirect('/');
     }
 
@@ -116,10 +120,9 @@ class UserController extends Controller
             // Vérifier si l'utilisateur existe et si le mot de passe est correct
             if ($user && password_verify($user_data['password'], $user->getPassword())) {
                 // Si la connexion est réussie, l'utilisateur est authentifié
-                // Stocker les informations utilisateur dans la session
-                $_SESSION['id'] = $user->getId();  // Stocke l'ID de l'utilisateur dans la session
-                $_SESSION['email'] = $user->getEmail();  // Stocke l'email de l'utilisateur dans la session
-                $_SESSION['firstname'] = $user->getFirstname();  // Stocke le prénom de l'utilisateur
+                // Ajout de l'utilisateur en session
+                $user->setPassword('');
+                $_SESSION['user'] = $user;
 
                 // Rediriger l'utilisateur vers la page d'accueil 
                 $this->redirect('/');

@@ -1,8 +1,8 @@
 <h1>Bienvenue sur Airbnb</h1>
 <?php
 // On veux cacher le ul une fois connecté
-if (isset($_SESSION['firstname'])) {
-    $firstname = $_SESSION['firstname'];
+if (isset($_SESSION['user'])) {
+    $firstname = $_SESSION['user']->getFirstname();
 } else {
     $firstname = ''; // Valeur par défaut si la clé n'est pas présente
 }
@@ -16,22 +16,17 @@ if ($firstname == '') {
 } else {
 ?>
     <ul>
-        <li><a href="/profil">Mon profil</a></li>
-        <li><a href="/profil">Mes locations</a></li>
-        <li><a href="/biens">Mes biens</a></li>
-        <li><a href="/users/logout">Se déconnecter</a></li>
+        <!-- <li><a href="/profil">Mon profil</a></li> -->
+        <li><a href="/users/listaccomodation/<?php echo $_SESSION['user']->getId() ?>">Voir mes annonces</a></li>
+        <li><a href="/">Mes Réservations</a></li>
+        <li><a href="/users/addaccommodation">Ajouter une location</a></li>
+        <li><a href="/">Se déconnecter</a></li>
     </ul>
 <?php
 }
 ?>
 <h2> Locations </h2>
 <?php
-// Vérifie que la session contient bien les données
-if (isset($_SESSION['firstname'])) {
-    $firstname = $_SESSION['firstname'];
-} else {
-    $firstname = ''; // Valeur par défaut si la clé n'est pas présente
-}
 
 ?>
 <p>Bonjour <?php echo htmlspecialchars($firstname); ?></p>
@@ -51,6 +46,7 @@ if (isset($_SESSION['firstname'])) {
                         <li>beds : <?php echo $accommodation->getBeds() ?></li>
                         <li>owner_id : <?php echo $accommodation->getOwnerId() ?></li>
                         <li>image : <?php echo $accommodation->getImage() ?> </li>
+                        <li><a href="users/rental">Louer</a></li>
                     </ul>
                 </li>
             <?php endforeach ?>
