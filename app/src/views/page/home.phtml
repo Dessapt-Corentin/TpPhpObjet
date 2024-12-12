@@ -46,7 +46,13 @@ if ($firstname == '') {
                         <li>beds : <?php echo $accommodation->getBeds() ?></li>
                         <li>owner_id : <?php echo $accommodation->getOwnerId() ?></li>
                         <li>image : <?php echo $accommodation->getImage() ?> </li>
-                        <li><a href="users/rental">Louer</a></li>
+                        <li>
+                            <?php if (isset($_SESSION['user'])): ?>
+                                <a href="/users/create-rental" class="protected-link">Louer</a>
+                            <?php else: ?>
+                                <a href="/users/login" class="protected-link">Louer</a>
+                            <?php endif; ?>
+                        </li>
                     </ul>
                 </li>
             <?php endforeach ?>

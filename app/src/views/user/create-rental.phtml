@@ -1,3 +1,15 @@
+<?php
+if (isset($_GET['accommodation_id'])) {
+    $accommodation_id = $_GET['accommodation_id'];
+} else {
+    // Handle the case where the accommodation_id is not set
+    $accommodation_id = '';
+}
+?>
+<script>
+    document.getElementById('accommodation_id').value = "<?php echo $accommodation_id; ?>";
+</script>
+
 <div>
     <ul>
         <li><a href="/">🔙 Retour</a></li>
@@ -12,10 +24,7 @@
         <input type="number" id="user_id" name="user_id" required>
     </div>
 
-    <div>
-        <label for="accommodation_id">ID du logement :</label>
-        <input type="number" id="accommodation_id" name="accommodation_id" required>
-    </div>
+    <input type="hidden" id="accommodation_id" name="accommodation_id" value="">
 
     <div>
         <label for="date_start">Date de début :</label>

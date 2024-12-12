@@ -40,13 +40,11 @@ class AccommodationRepository extends Repository
         return $this->readById(Accommodation::class, $owner_id);
     }
 
+    
+
     // Récupérer les accommodations d'un seul utilisateur par son owner ID 
     public function getByOwnerId(int $owner_id): array
     {
-        // $query = 'SELECT * FROM accommodations WHERE owner_id = :owner_id';
-        // $stmt = $this->pdo->prepare($query);
-        // $stmt->execute(['owner_id' => $owner_id]);
-        // return $stmt->fetchAll(PDO::FETCH_CLASS, Accommodation::class);
         $query = sprintf(
             'SELECT * FROM `%s` WHERE owner_id=:owner_id',
             $this->getTableName()

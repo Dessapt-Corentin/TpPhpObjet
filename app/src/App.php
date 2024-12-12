@@ -10,6 +10,7 @@ namespace App;
 use App\Controller\AccommodationController;
 use App\Controller\PageController;
 use App\Controller\UserController;
+use App\Controller\RentalController;
 use Exception;
 use Throwable;
 
@@ -76,6 +77,9 @@ final class App
         $this->router->post('/', [AccommodationController::class, 'create']);
 
         $this->router->get('/users/listaccomodation/{id}', [AccommodationController::class, 'list']);
+
+        $this->router->get('/users/create-rental', [RentalController::class, 'add']);
+        $this->router->post('/', [RentalController::class, 'create']);
 
         
     }
