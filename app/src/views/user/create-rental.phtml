@@ -1,31 +1,21 @@
-<?php
-if (isset($_GET['accommodation_id'])) {
-    $accommodation_id = $_GET['accommodation_id'];
-} else {
-    // Handle the case where the accommodation_id is not set
-    $accommodation_id = '';
-}
-?>
-<script>
-    document.getElementById('accommodation_id').value = "<?php echo $accommodation_id; ?>";
-</script>
-
 <div>
     <ul>
         <li><a href="/">🔙 Retour</a></li>
     </ul>
 </div>
 <h1>Ajouter une location</h1>
-<form action="/users/submit-rental" method="post">
+<form action="/" method="post">
     <h2>Formulaire de location</h2>
 
-    <div>
-        <label for="user_id">ID de l'utilisateur :</label>
-        <input type="number" id="user_id" name="user_id" required>
-    </div>
+    <input type="hidden" id="user_id" name="user_id" value="<?php echo $_SESSION['user']->getId(); ?>">
 
-    <input type="hidden" id="accommodation_id" name="accommodation_id" value="">
-
+    <!-- Je veux récupérer l'id de l'accommodation -->
+    <?php if (isset($accommodation)): ?>
+        <input type="hidden" id="accommodation_id" name="accommodation_id" value="<?php echo $accommodation->getId(); ?>">
+    <?php else: ?>
+        <p>Erreur: L'accommodation n'est pas définie.</p>
+    <?php endif; ?>
+    
     <div>
         <label for="date_start">Date de début :</label>
         <input type="datetime-local" id="date_start" name="date_start" required>

@@ -58,12 +58,6 @@ class UserController extends Controller
         $view->render($data);
     }
 
-    public function logout(): void
-    {
-        session_destroy();
-        $this->redirect('/');
-    }
-
     public function profil(): void
     {
         $view = new View('user:profil');
@@ -134,5 +128,26 @@ class UserController extends Controller
             // Si les champs sont vides
             echo "Veuillez remplir tous les champs.";
         }
+    }
+
+    public function logout(): void
+    {
+        // Supprimer l'utilisateur de la session
+        unset($_SESSION['user']);
+
+        // Détruire le cookie de session
+        if (ini_get("session.use_cookies")) {
+            $params = session_get_cookie_params();
+            setcookie(session_name(), '', time() - 42000,
+                $params["path"], $params["domain"],
+                $params["secure"], $params["httponly"]
+            );
+        }
+
+        // Détruire la session
+        session_destroy();
+
+        // Rediriger l'utilisateur vers la page d'accueil
+        $this->redirect('/');
     }
 }

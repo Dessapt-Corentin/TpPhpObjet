@@ -1,0 +1,21 @@
+<div>
+    <a href="/">🏠 Retour</a>
+</div>
+<h1>Mes locations</h1>
+
+<?php
+if (!empty($rentals)): ?>
+    <ul>
+        <?php foreach ($rentals as $rental): ?>
+            <li>
+                <ul>
+                    <li>Date de début : <?php echo $rental->getDateStart()->format('Y-m-d H:i:s'); ?></li>
+                    <li>Date de fin : <?php echo $rental->getDateEnd()->format('Y-m-d H:i:s'); ?></li>
+                </ul>
+            </li>
+        <?php endforeach ?>
+    </ul>
+
+<?php else: ?>
+    <div>Vous n'avez aucune réservation.</div>
+<?php endif ?>

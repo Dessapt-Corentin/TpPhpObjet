@@ -38,9 +38,7 @@ class AccommodationRepository extends Repository
     public function getById(int $owner_id): ?Accommodation
     {
         return $this->readById(Accommodation::class, $owner_id);
-    }
-
-    
+    }   
 
     // Récupérer les accommodations d'un seul utilisateur par son owner ID 
     public function getByOwnerId(int $owner_id): array

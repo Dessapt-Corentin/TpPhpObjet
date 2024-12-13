@@ -12,14 +12,10 @@ class Equipment extends Entity
         return $this->id;
     }
 
-    protected string $label;
-    public function getLabel(): string
+    protected string $label = '';
+    public function getEquipment()
     {
         return $this->label;
     }
-    public function setLabel(string $value): self
-    {
-        $this->label = $value;
-        return $this;
-    }
+
 }

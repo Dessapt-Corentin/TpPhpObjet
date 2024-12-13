@@ -55,6 +55,8 @@ class RepoManager
         return $this->accommodation_equipment_repository;
     }
 
+
+
     private function __construct()
     {
         $pdo = Database::getPDO();

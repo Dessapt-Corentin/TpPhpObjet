@@ -17,19 +17,55 @@ class RentalRepository extends Repository
         return $this->readAll(Rental::class);
     }
 
-    public function getById(int $id): ?Rental
+    public function getById(int $user_id): ?Rental
     {
-        return $this->readById(Rental::class, $id);
+        return $this->readById(Rental::class, $user_id);
     }
+
+    public function getByUserId(int $user_id): array
+    {
+        $query = sprintf(
+            'SELECT * FROM `%s` WHERE user_id=:user_id',
+            $this->getTableName()
+        );
+
+        $sth = $this->pdo->prepare($query);
+
+        // Si la préparation échoue
+        if (! $sth) {
+            return null;
+        }
+
+        $success = $sth->execute(['user_id' => $user_id]);
+
+        // Si echec
+        if (! $success) {
+            return null;
+        }
+        
+        // Récupération du premier résultat
+        $object_data = $sth->fetch();
+
+        // Récupération des résultats
+        $data = [];
+
+        while ($object_data = $sth->fetch()) {
+            $rental = new Rental($object_data);
+            $data[] = $rental;
+        }
+
+        return $data;
+    }
+
+
 
     
     public function create(Rental $rental): ?Rental
     {
-
         $query = sprintf(
             'INSERT INTO `%s`
-    (user_id, accommodation_id, date_start, date_end)
-    VALUES (:user_id, :accommodation_id, :date_start, :date_end)',
+            (user_id, accommodation_id, date_start, date_end)
+            VALUES (:user_id, :accommodation_id, :date_start, :date_end)',
             $this->getTableName()
         );
 
@@ -42,12 +78,10 @@ class RentalRepository extends Repository
 
         $success = $sth->execute([
             'user_id' => $rental->getUserId(),
-            'accommodation_id' => $rental->getAccommodationId(),
-            'date_start' => $rental->getDateStart(),
-            'date_end' => $rental->getDateEnd(),
+            'accommodation_id' => (int) $rental->getAccommodationId(),
+            'date_start' => $rental->getDateStart()->format('Y-m-d H:i:s'),
+            'date_end' => $rental->getDateEnd()->format('Y-m-d H:i:s'),
         ]);
-        var_dump($success);
-        die();
 
         // Si echec de l'insertion
         if (! $success) {

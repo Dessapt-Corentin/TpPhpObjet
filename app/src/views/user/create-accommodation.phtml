@@ -25,7 +25,7 @@
         <label for="select-id_type">Type de bien :</label>
         <select name="id_type" id="select-id_type">
             <option value="">Choisissez...</option>
-            <!-- Insertion des éléments des équipements -->
+            <!-- Insertion des éléments des types d'accomodation -->
             <?php foreach ($types_accommodations  as $type) : ?>
                 <option value="<?= $type->getId() ?>"><?= $type->getTypeAccommodation() ?></option>
             <?php endforeach; ?>
@@ -39,12 +39,25 @@
         <label for="input-description">Description :</label>
         <input type="text" name="description" id="input-description">
     </div>
+    <!-- div pour select les equipments disponibles -->
+    <div>
+        <label for="select-equipment">Equipements :</label>
+        <select name="equipment[]" id="select-equipment" multiple>
+            <option value="">Choisissez...</option>
+            <!-- Insertion des éléments des équipements -->
+            <?php foreach ($equipments as $equipment) : ?>
+            <option value="<?= $equipment->getId() ?>"><?= $equipment->getEquipment() ?></option>
+            <?php endforeach; ?>
+        </select>
+    </div>
     <div>
         <label for="input-beds">Couchages :</label>
         <input type="number" name="beds" id="input-beds">
     </div>
+    <div>
     <label for="input-image">Image :</label>
     <input type="file" name="image" id="input-image">
+    </div>
     <div>
         <input type="submit" value="Ajouter">
     </div>

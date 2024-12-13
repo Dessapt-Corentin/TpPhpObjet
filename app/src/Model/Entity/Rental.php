@@ -13,6 +13,32 @@ class Rental extends Entity
         return $this->id;
     }
 
+    protected DateTime $date_start;
+    protected DateTime $date_end;
+    public function __construct()
+    {
+        $this->date_start = new DateTime();
+        $this->date_end = new DateTime();
+    }
+    public function getDateStart(): DateTime
+    {
+        return $this->date_start;
+    }
+    public function setDateStart(DateTime $date_start): self
+    {
+        $this->date_start = $date_start;
+        return $this;
+    }
+    public function getDateEnd(): DateTime
+    {
+        return $this->date_end;
+    }
+    public function setDateEnd(DateTime $date_end): self
+    {
+        $this->date_end = $date_end;
+        return $this;
+    }
+
     protected int $user_id;
     public function getUserId(): int
     {
@@ -24,36 +50,14 @@ class Rental extends Entity
         return $this;
     }
 
-    protected int $accommodation_id;
-    public function getAccommodationId(): int
+    protected string $accommodation_id = '';
+    public function getAccommodationId(): string
     {
         return $this->accommodation_id;
     }
-    public function setAccommodationId(int $value): self
+    public function setAccommodationId(string $value): self
     {
         $this->accommodation_id = $value;
         return $this;
-    }
-
-    protected DateTime $date_start;
-    public function getDateStart(): DateTime
-    {
-        return $this->date_start;
-    }
-    public function setDateStart(DateTime $value): self
-    {
-        $this->date_start = $value;
-        return $this;
-    }
-
-    protected DateTime $date_end;
-    public function getDateEnd(): DateTime
-    {
-        return $this->date_end;
-    }
-    public function setDateEnd(DateTime $value): self
-    {
-        $this->date_end = $value;
-        return $this;
-    }
+}
 }

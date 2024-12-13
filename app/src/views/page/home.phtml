@@ -18,9 +18,9 @@ if ($firstname == '') {
     <ul>
         <!-- <li><a href="/profil">Mon profil</a></li> -->
         <li><a href="/users/listaccomodation/<?php echo $_SESSION['user']->getId() ?>">Voir mes annonces</a></li>
-        <li><a href="/">Mes Réservations</a></li>
+        <li><a href="/users/list-rental/<?php echo $_SESSION['user']->getId() ?>">Mes Réservations</a></li>
         <li><a href="/users/addaccommodation">Ajouter une location</a></li>
-        <li><a href="/">Se déconnecter</a></li>
+        <li><a href="/users/logout">Se déconnecter</a></li>
     </ul>
 <?php
 }
@@ -37,14 +37,13 @@ if ($firstname == '') {
             <?php foreach ($accommodations as $accommodation): ?>
                 <li>
                     <ul>
-                        <li>id : <?php echo $accommodation->getId() ?></li>
-                        <li>adresse_id : <?php echo $accommodation->getAdresseId() ?></li>
+                        <li>country : <?php  ?></li>
+                        <li>city : <?php  ?></li>
                         <li>price : <?php echo $accommodation->getPrice() ?></li>
                         <li>id_type : <?php echo $accommodation->getIdType() ?></li>
                         <li>size : <?php echo $accommodation->getSize() ?></li>
                         <li>description : <?php echo $accommodation->getDescription() ?></li>
                         <li>beds : <?php echo $accommodation->getBeds() ?></li>
-                        <li>owner_id : <?php echo $accommodation->getOwnerId() ?></li>
                         <li>image : <?php echo $accommodation->getImage() ?> </li>
                         <li>
                             <?php if (isset($_SESSION['user'])): ?>

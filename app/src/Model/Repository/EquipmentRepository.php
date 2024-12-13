@@ -9,7 +9,7 @@ class EquipmentRepository extends Repository
 {
     protected function getTableName(): string
     {
-        return 'types_accommodations';
+        return 'equipments';
     }
 
     public function getAll(): array
@@ -21,5 +21,9 @@ class EquipmentRepository extends Repository
     {
         return $this->readById(Equipment::class, $id);
     }
-    
+
+    public function getByEquipment(string $equipment): ?Equipment
+    {
+        return $this->readByEquipment(Equipment::class, $equipment);
+    }
 }
