@@ -9,18 +9,18 @@ if (isset($_SESSION['user'])) {
 if ($firstname == '') {
 ?>
     <ul>
-        <li><a href="/users/add">Créer un compte</a></li>
-        <li><a href="/users/login">Se connecter</a></li>
+        <button><a href="/users/add">Créer un compte</a></button>
+        <button><a href="/users/login">Se connecter</a></button>
     </ul>
 <?php
 } else {
 ?>
     <ul>
         <!-- <li><a href="/profil">Mon profil</a></li> -->
-        <li><a href="/users/listaccomodation/<?php echo $_SESSION['user']->getId() ?>">Voir mes annonces</a></li>
-        <li><a href="/users/list-rental/<?php echo $_SESSION['user']->getId() ?>">Mes Réservations</a></li>
-        <li><a href="/users/addaccommodation">Ajouter une location</a></li>
-        <li><a href="/users/logout">Se déconnecter</a></li>
+        <button><a href="/users/listaccomodation/<?php echo $_SESSION['user']->getId() ?>">Voir mes annonces</a></button>
+        <button><a href="/users/list-rental/<?php echo $_SESSION['user']->getId() ?>">Mes Réservations</a></button>
+        <button><a href="/users/addaccommodation">Ajouter une location</a></button>
+        <button><a href="/users/logout">Se déconnecter</a></button>
     </ul>
 <?php
 }
@@ -35,25 +35,23 @@ if ($firstname == '') {
     if (!empty($accommodations)) : ?>
         <ul>
             <?php foreach ($accommodations as $accommodation): ?>
-                <li>
-                    <ul>
-                        <li>country : <?php  ?></li>
-                        <li>city : <?php  ?></li>
-                        <li>price : <?php echo $accommodation->getPrice() ?></li>
-                        <li>id_type : <?php echo $accommodation->getIdType() ?></li>
-                        <li>size : <?php echo $accommodation->getSize() ?></li>
-                        <li>description : <?php echo $accommodation->getDescription() ?></li>
-                        <li>beds : <?php echo $accommodation->getBeds() ?></li>
-                        <li>image : <?php echo $accommodation->getImage() ?> </li>
+                <ul>
+                    <li>country : <?php  ?></li>
+                    <li>city : <?php  ?></li>
+                    <li>price : <?php echo $accommodation->getPrice() ?></li>
+                    <li>id_type : <?php echo $accommodation->getIdType() ?></li>
+                    <li>size : <?php echo $accommodation->getSize() ?></li>
+                    <li>description : <?php echo $accommodation->getDescription() ?></li>
+                    <li>beds : <?php echo $accommodation->getBeds() ?></li>
+                    <li>image : <?php echo $accommodation->getImage() ?> </li>
                         <li>
                             <?php if (isset($_SESSION['user'])): ?>
-                                <a href="/users/create-rental" class="protected-link">Louer</a>
+                                <button><a href="/users/create-rental" class="protected-link">Louer</a></button>
                             <?php else: ?>
-                                <a href="/users/login" class="protected-link">Louer</a>
+                                <button><a href="/users/login" class="protected-link">Louer</a></button>
                             <?php endif; ?>
                         </li>
-                    </ul>
-                </li>
+                </ul>
             <?php endforeach ?>
         </ul>
 </div>
