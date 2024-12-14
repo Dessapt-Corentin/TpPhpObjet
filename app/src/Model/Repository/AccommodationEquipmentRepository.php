@@ -24,10 +24,10 @@ class AccommodationEquipmentRepository extends Repository
 
     public function create(array $accommodation_equipment): ?AccommodationEquipment
     {
-        $query = "INSERT INTO accommodations_equipments (id_accommodation, id_equipment) VALUES (:id_accommodation, :id_equipment)";
-        $sth = $this->pdo->prepare($query);
-        $sth->execute($data_accommodation);
-        return (int) $this->pdo->lastInsertId();
+        $query = "INSERT INTO accommodations_equipments (accomodation_id, equipments_id) VALUES (:accomodation_id, :equipments_id)";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute($accommodation_equipment);
+        return $this->getById($this->pdo->lastInsertId());
     }
-    
+
 }

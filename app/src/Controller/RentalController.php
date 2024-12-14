@@ -6,12 +6,12 @@ use App\Model\Entity\Rental;
 use App\Model\Repository\RepoManager;
 use Symplefony\Controller;
 use Symplefony\View;
-use Psr\Http\Message\ServerRequestInterface as ServerRequest;
+use Laminas\Diactoros\ServerRequest;
 
 class RentalController extends Controller
 {
 
-    public function add(): void
+    public function addRental(): void
     {
         $view = new View('user:create-rental');
         $data = [

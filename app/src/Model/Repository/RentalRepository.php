@@ -56,10 +56,6 @@ class RentalRepository extends Repository
 
         return $data;
     }
-
-
-
-    
     public function create(Rental $rental): ?Rental
     {
         $query = sprintf(

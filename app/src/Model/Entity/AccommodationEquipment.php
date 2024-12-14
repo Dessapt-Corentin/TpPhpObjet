@@ -17,14 +17,14 @@ class AccommodationEquipment extends Entity
         return $this;
     }
 
-    protected int $equipment_id;
+    protected int $equipments_id;
     public function getEquipmentId(): int
     {
-        return $this->equipment_id;
+        return $this->equipments_id;
     }
     public function setEquipmentId(int $value): self
     {
-        $this->equipment_id = $value;
+        $this->equipments_id = $value;
         return $this;
     }
 }

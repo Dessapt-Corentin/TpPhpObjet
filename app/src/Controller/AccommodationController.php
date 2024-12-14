@@ -11,7 +11,7 @@ use Symplefony\View;
 class AccommodationController extends Controller
 {
     // Biens: Ajout
-    public function add(): void
+    public function addAccommodation(): void
     {
         $view = new View('user:create-accommodation');
         $type_accommodation = RepoManager::getRM()->getTypeAccommodationRepo()->getAll();
@@ -50,7 +50,7 @@ class AccommodationController extends Controller
         $accommodation_id = RepoManager::getRM()->getAccommodationRepo()->create($data_accommodation);
         $data_accommodation_equipments = [
             'accommodation_id' => $accommodation_id,
-            'equipment_id' => $accommodation_data['equipment_id'] ?? null
+            'equipments_id' => $accommodation_data['equipments_id'] ?? null
         ];
 
 
