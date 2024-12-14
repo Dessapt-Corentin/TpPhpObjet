@@ -33,28 +33,32 @@ if ($firstname == '') {
 <div class="card" style="width: 18rem;">
     <?php
     if (!empty($accommodations)) : ?>
-        <ul>
+        <div class="accommodations-list">
             <?php foreach ($accommodations as $accommodation): ?>
-                <ul>
-                    <li>country : <?php  ?></li>
-                    <li>city : <?php  ?></li>
-                    <li>price : <?php echo $accommodation->getPrice() ?></li>
-                    <li>id_type : <?php echo $accommodation->getIdType() ?></li>
-                    <li>size : <?php echo $accommodation->getSize() ?></li>
-                    <li>description : <?php echo $accommodation->getDescription() ?></li>
-                    <li>beds : <?php echo $accommodation->getBeds() ?></li>
-                    <li>image : <?php echo $accommodation->getImage() ?> </li>
-                        <li>
-                            <?php if (isset($_SESSION['user'])): ?>
-                                <button><a href="/users/create-rental" class="protected-link">Louer</a></button>
-                            <?php else: ?>
-                                <button><a href="/users/login" class="protected-link">Louer</a></button>
-                            <?php endif; ?>
-                        </li>
-                </ul>
+                <div class="accommodation-item">
+                    <p>
+                        <ul>
+                            <li>country : <?php  ?></li>
+                            <li>city : <?php  ?></li>
+                            <li>price : <?php echo $accommodation->getPrice() ?></li>
+                            <li>id_type : <?php echo $accommodation->getIdType() ?></li>
+                            <li>size : <?php echo $accommodation->getSize() ?></li>
+                            <li>description : <?php echo $accommodation->getDescription() ?></li>
+                            <li>beds : <?php echo $accommodation->getBeds() ?></li>
+                            <li>image : <?php echo $accommodation->getImage() ?> </li>
+                            <li>
+                                <?php if (isset($_SESSION['user'])): ?>
+                                    <button><a href="/users/create-rental" class="protected-link">Louer</a></button>
+                                <?php else: ?>
+                                    <button><a href="/users/login" class="protected-link">Louer</a></button>
+                                <?php endif; ?>
+                            </li>
+                        </ul>
+                    </p>
+                </div>
             <?php endforeach ?>
-        </ul>
+        </div>
+    <?php else: ?>
+        <div>Aucune location disponible</div>
+    <?php endif; ?>
 </div>
-<?php else: ?>
-    <div>Aucune location disponible</div>
-<?php endif ?>

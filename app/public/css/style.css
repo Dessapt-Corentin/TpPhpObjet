@@ -18,6 +18,7 @@ body {
 li {
   list-style-type: none;
   color: #484848;
+  background-color:#050024 ;
 }
 
 ul {
@@ -57,4 +58,21 @@ form {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* class="accommodation-item" */
+.accommodation-item {
+  background-color: #050024;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  height: 330px;
+  width: 300px;
+}
+
+.accommodations-list {
+display: flex;
+flex-wrap: wrap;
 }

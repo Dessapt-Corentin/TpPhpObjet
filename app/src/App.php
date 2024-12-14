@@ -75,12 +75,12 @@ final class App
         $this->router->get('/', [PageController::class, 'index']);
 
         $this->router->get('/users/addaccommodation', [AccommodationController::class, 'add']);
-        $this->router->post('/', [AccommodationController::class, 'create']);
+        $this->router->post('/', [AccommodationController::class, 'createAccommodation']);
         $this->router->get('/users/listaccomodation/{id}', [AccommodationController::class, 'list']);
 
-        $this->router->get('/users/create-rental', [RentalController::class, 'add']);
-        $this->router->post('/', [RentalController::class, 'createRental']);//
-        $this->router->get('/users/list-rental/{id}', [RentalController::class, 'list']);
+        //$this->router->get('/users/create-rental', [RentalController::class, 'add']);
+        //$this->router->post('/', [RentalController::class, 'createRental']);
+        //$this->router->get('/users/list-rental/{id}', [RentalController::class, 'list']);
 
         
     }

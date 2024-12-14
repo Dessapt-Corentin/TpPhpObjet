@@ -25,7 +25,7 @@ class AccommodationController extends Controller
     }
 
     // Biens: Création
-    public function create(ServerRequest $request): void
+    public function createAccommodation(ServerRequest $request): void
     {
         $accommodation_data = $request->getParsedBody();
 

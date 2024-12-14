@@ -16,13 +16,21 @@ class AccommodationRepository extends Repository
     /* Crud: Create */
     public function create(array $accommodation): ?Accommodation
     {
+        // Check if the accommodation already exists
+        $queryCheck = 'SELECT * FROM accommodations WHERE adresse_id = :adresse_id AND owner_id = :owner_id';
+        $stmtCheck = $this->pdo->prepare($queryCheck);
+        $stmtCheck->execute(['adresse_id' => $accommodation['adresse_id'], 'owner_id' => $accommodation['owner_id']]);
+        
+        if ($stmtCheck->fetch()) {
+            // Accommodation already exists
+            return null;
+        }
+
         // 1. Insérer les données de accommodation dans la table accommodations
-        $queryAccommodation = 'INSERT INTO accommodations (adresse_id, price, id_type,size,description,beds,owner_id)
+        $queryAccommodation = 'INSERT INTO accommodations (adresse_id, price, id_type, size, description, beds, owner_id)
         VALUES (:adresse_id, :price, :id_type, :size, :description, :beds, :owner_id)';
         $stmtAccommodation = $this->pdo->prepare($queryAccommodation);
         $stmtAccommodation->execute($accommodation);
-
-
 
         // 2. Récupérer l'ID de l'accommodation inséré
         return $this->getById($this->pdo->lastInsertId());
