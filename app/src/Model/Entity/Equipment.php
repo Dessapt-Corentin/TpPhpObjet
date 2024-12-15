@@ -12,7 +12,7 @@ class Equipment extends Entity
         return $this->id;
     }
 
-    protected string $label = '';
+    protected string $label;
     public function getEquipment()
     {
         return $this->label;

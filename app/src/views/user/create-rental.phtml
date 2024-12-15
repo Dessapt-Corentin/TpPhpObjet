@@ -1,10 +1,10 @@
 <div>
-    <ul>
-        <li><a href="/">🔙 Retour</a></li>
-    </ul>
+    <button><a href="/">🏠 Retour</a></button>
 </div>
+
 <h1>Ajouter une location</h1>
-<form action="/" method="post">
+
+<form action="/users/create-rental" method="post">
     <h2>Formulaire de location</h2>
 
     <input type="hidden" id="user_id" name="user_id" value="<?php echo $_SESSION['user']->getId(); ?>">

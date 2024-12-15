@@ -24,8 +24,8 @@ class User extends Entity
     }
     public function setPassword(string $password): self
     {
-        $this->password = password_hash($password, PASSWORD_DEFAULT);
-        return $this; // Permet de "chaîner" les appels aux setters: $toto->setId(2)->setName('toto'), etc.
+        $this->password = $password;
+        return $this;
     }
 
     protected string $email;

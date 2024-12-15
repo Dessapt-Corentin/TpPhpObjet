@@ -22,8 +22,10 @@ class EquipmentRepository extends Repository
         return $this->readById(Equipment::class, $id);
     }
 
-    public function getByEquipment(string $equipment): ?Equipment
+    public function getbyLabel(): ?Equipment
     {
-        return $this->readByEquipment(Equipment::class, $equipment);
+        return $this->readByLabel(Equipment::class, $label);
     }
+
+    
 }

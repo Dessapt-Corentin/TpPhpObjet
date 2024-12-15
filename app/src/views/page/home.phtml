@@ -1,6 +1,7 @@
 <h1>Bienvenue sur Airbnb</h1>
+
 <?php
-// On veux cacher le ul une fois connecté
+// On veux cacher les bouttons une fois connecté
 if (isset($_SESSION['user'])) {
     $firstname = $_SESSION['user']->getFirstname();
 } else {
@@ -8,20 +9,23 @@ if (isset($_SESSION['user'])) {
 }
 if ($firstname == '') {
 ?>
-    <ul>
+
+    <div>
         <button><a href="/users/add">Créer un compte</a></button>
         <button><a href="/users/login">Se connecter</a></button>
-    </ul>
+    </div>
+
 <?php
 } else {
 ?>
-    <ul>
+    <div>
         <!-- <li><a href="/profil">Mon profil</a></li> -->
         <button><a href="/users/listaccomodation/<?php echo $_SESSION['user']->getId() ?>">Voir mes annonces</a></button>
         <button><a href="/users/list-rental/<?php echo $_SESSION['user']->getId() ?>">Mes Réservations</a></button>
         <button><a href="/users/addaccommodation">Ajouter une location</a></button>
         <button><a href="/users/logout">Se déconnecter</a></button>
-    </ul>
+    </div>
+
 <?php
 }
 ?>

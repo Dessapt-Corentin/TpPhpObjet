@@ -56,7 +56,7 @@ class Accommodation extends Entity
         return $this;
     }
 
-    protected string $description = '';
+    protected string $description ;
     public function getDescription(): string
     {
         return $this->description;
