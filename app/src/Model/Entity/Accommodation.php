@@ -125,6 +125,19 @@ class Accommodation extends Entity
         return $this;
     }
 
+    protected ?string $equipment_id = null;
+    public function getEquipmentId(): ?string
+    {
+        return $this->equipment_id;
+    }
+
+    public function setEquipmentId(?string $value): self
+    {
+        $this->equipment_id = $value;
+        return $this;
+    }
+
+
     // Liaison avec la table adresse
     protected Adresse $adresse;
     public function getAdress(): Adresse
@@ -148,7 +161,7 @@ class Accommodation extends Entity
     public function getEquipments(): array
     {
         if (!isset($this->equipments)) {
-            $this->equipments = RepoManager::getRM()->getEquipmentRepo()->getAllForEquipment($this->id);
+            $this->equipments = RepoManager::getRM()->getEquipmentRepo()->getAllForAccommodation($this->id);
         }
         return $this->equipments;
     }
@@ -157,13 +170,13 @@ class Accommodation extends Entity
     {
         $equipment_repo = RepoManager::getRM()->getEquipmentRepo();
 
-        $equipment_repo->detachAllForEquipment($this->id);
+        $equipment_repo->detachAllForAccommodation($this->id);
 
         if (empty($ids_equipments)) {
             return $this;
         }
 
-        $equipment_repo->attachForEquipment($this->id, $ids_equipments);
+        $equipment_repo->attachForAccommodation($ids_equipments, $this->id);
 
         return $this;
     }

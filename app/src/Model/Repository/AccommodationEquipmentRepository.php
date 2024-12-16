@@ -38,67 +38,16 @@ class AccommodationEquipmentRepository extends Repository
         return $sth->fetchAll(\PDO::FETCH_CLASS, AccommodationEquipment::class);
     }
 
-    public function create(Accommodation $accommodation, Equipment $equipment)
+    public function create(array $accommodationEquipment): ?AccommodationEquipment
     {
-        $accommodationId = $accommodation->getId();
-        $equipmentId = $equipment->getId();
+        // j'ai besoin de retourner un objet AccommodationEquipment
+        // 1. Insérer les données de accommodation dans la table accommodations_equipments
+        $queryAccommodationEquipment = 'INSERT INTO accommodations_equipments (accommodation_id, equipment_id)
+        VALUES (:accommodation_id, :equipment_id)';
+        $stmtAccommodationEquipment = $this->pdo->prepare($queryAccommodationEquipment);
+        $stmtAccommodationEquipment->execute($accommodationEquipment);
 
-        $query = sprintf(
-            'INSERT INTO `%s` (accommodation_id, equipments_id) VALUES (:accommodation_id, :equipments_id)',
-            $this->getTableName()
-        );
-
-        $sth = $this->pdo->prepare($query);
-        $sth->execute([
-            'accommodation_id' => $accommodationId,
-            'equipments_id' => $equipmentId
-        ]);
-
+        // 2. Récupérer l'ID de l'accommodation inséré
         return $this->getById($this->pdo->lastInsertId());
-    }
-
-    public function detachAllForAccommodation(int $id): bool
-    {
-        $query = sprintf(
-            'DELETE FROM `%s` WHERE accommodation_id=:id',
-            $this->getMappingAccommodation()
-        );
-
-        $sth = $this->pdo->prepare($query);
-
-        // Si la préparation échoue
-        if (! $sth) {
-            return false;
-        }
-
-        $success = $sth->execute(['id' => $id]);
-
-        return $success;
-    }
-
-    /* Insére les liaisons de catégories demandée pour d'une voiture donnée */
-    public function attachForAccommodation(array $ids_categories, int $accommodation_id): bool
-    {
-        $query_values = [];
-        foreach ($ids_categories as $category_id) {
-            $query_values[] = sprintf('( %s,%s )', $category_id, $accommodation_id);
-        }
-
-        $query = sprintf(
-            'INSERT INTO `%s` 
-                (`category_id`, `accommodation_id`) 
-                VALUES %s',
-            $this->getMappingAccommodation(),
-            implode(',', $query_values)
-        );
-
-        $sth = $this->pdo->prepare($query);
-
-        // Si la préparation échoue
-        if (! $sth) {
-            return false;
-        }
-
-        return $sth->execute();
     }
 }

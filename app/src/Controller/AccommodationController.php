@@ -15,11 +15,10 @@ class AccommodationController extends Controller
     {
         $view = new View('user:create-accommodation');
         $type_accommodation = RepoManager::getRM()->getTypeAccommodationRepo()->getAll();
-        $label = RepoManager::getRM()->getEquipmentRepo()->getAll();
         $data = [
             'title' => 'Ajouter un bien',
             'types_accommodations' => $type_accommodation,
-            'equipments' => $label
+            'equipments' => RepoManager::getRM()->getEquipmentRepo()->getAll()
         ];
         $view->render($data);
     }
@@ -47,9 +46,21 @@ class AccommodationController extends Controller
             'owner_id' => $_SESSION['user']->getId()
         ];
 
-        RepoManager::getRM()->getAccommodationRepo()->create($data_accommodation);
+        $accommodation_id = RepoManager::getRM()->getAccommodationRepo()->create($data_accommodation);
+
+        // Insert into accommodations_equipments table
+        if (isset($accommodation_data['equipments']) && is_array($accommodation_data['equipments'])) {
+            foreach ($accommodation_data['equipments'] as $equipment_id) {
+                RepoManager::getRM()->getAccommodationEquipmentRepo()->create([
+                    'accommodation_id' => $accommodation_id,
+                    'equipment_id' => $equipment_id
+                ]);
+            }
+        }
+
         $this->redirect('/');
     }
+
 
     // Biens: Liste pour un utilisateur connecté
     public function list($id): void

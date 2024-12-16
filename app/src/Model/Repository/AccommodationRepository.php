@@ -25,7 +25,7 @@ class AccommodationRepository extends Repository
         $queryCheck = 'SELECT * FROM accommodations WHERE adresse_id = :adresse_id AND owner_id = :owner_id';
         $stmtCheck = $this->pdo->prepare($queryCheck);
         $stmtCheck->execute(['adresse_id' => $accommodation['adresse_id'], 'owner_id' => $accommodation['owner_id']]);
-
+        
         if ($stmtCheck->fetch()) {
             // Accommodation already exists
             return null;
@@ -87,6 +87,8 @@ class AccommodationRepository extends Repository
         return $data;
     }
 
+
+    // Todo 
     public function getAllForAccommodation(int $id): array
     {
         $query = sprintf(
@@ -144,6 +146,7 @@ class AccommodationRepository extends Repository
             $this->getMappingAccommodation(),
             implode(',', $query_values)
         );
+
         $sth = $this->pdo->prepare($query);
         // Si la préparation échoue
         if (! $sth) {

@@ -54,10 +54,13 @@ class EquipmentRepository extends Repository
         return null;
     }
 
-    public function getAllForEquipment(int $id): array
+    public function getAllForAccommodation(int $id): array
     {
         $query = sprintf(
-            'SELECT * FROM `%s` WHERE equipment_id=:equipment_id',
+            'SELECT equipments.* FROM `%1$s` as equipments 
+            JOIN `%2$s` as accommodations_equipments ON accommodations_equipments.equipments_id = equipments.id
+            WHERE accommodations_equipments.accommodation_id=:id',
+            $this->getTableName(),
             $this->getMappingAccommodation()
         );
 
@@ -67,52 +70,27 @@ class EquipmentRepository extends Repository
             return [];
         }
 
-        $success = $sth->execute(['equipment_id' => $id]);
+        $success = $sth->execute([
+            'id' => $id
+        ]);
 
         if (! $success) {
             return [];
         }
 
-        $data = [];
+        $equipments = [];
 
-        while ($object_data = $sth->fetch()) {
-            $equipment = new Equipment($object_data);
-            $data[] = $equipment;
+        while ($equipment_data = $sth->fetch()) {
+            $equipments[] = new Equipment($equipment_data);
         }
 
-        return $data;
+        return $equipments;
     }
 
-    public function attachForEquipment(array $ids_accommodations, int $equipment_id): bool
-    {
-        $query_values = [];
-        foreach ($ids_accommodations as $accommodation_id) {
-            $query_values[] = sprintf('( %s,%s )', $accommodation_id, $equipment_id);
-        }
-
-        $query = sprintf(
-            'INSERT INTO `%s` 
-                (`accommodation_id`, `equipment_id`) 
-                VALUES %s',
-            $this->getMappingAccommodation(),
-            implode(',', $query_values)
-        );
-
-        $sth = $this->pdo->prepare($query);
-
-        if (! $sth) {
-            return false;
-        }
-
-        $success = $sth->execute();
-
-        return $success;
-    }
-
-    public function detachAllForEquipment(int $id): bool
+    public function detachAllForAccommodation(int $id): bool
     {
         $query = sprintf(
-            'DELETE FROM `%s` WHERE equipment_id=:id',
+            'DELETE FROM `%s` WHERE accommodation_id=:id',
             $this->getMappingAccommodation()
         );
 
@@ -125,5 +103,27 @@ class EquipmentRepository extends Repository
         $success = $sth->execute(['id' => $id]);
 
         return $success;
+    }
+
+    public function attachForAccommodation( array $ids_equipments, int $accommodation_id): bool
+    {
+        $query_values = [];
+        foreach($ids_equipments as $equipments_id) {
+            $query_values[] = sprintf('(%s, %s)', $equipments_id, $accommodation_id);
+        }
+
+        $query = sprintf(
+            'INSERT INTO `%s` (equipments_id, accommodation_id) VALUES %s',
+            $this->getMappingAccommodation(),
+            implode(',', $query_values)
+        );
+
+        $sth = $this->pdo->prepare($query);
+
+        if (! $sth) {
+            return false;
+        }
+
+        $success = $sth->execute();
     }
 }
