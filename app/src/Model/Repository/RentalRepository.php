@@ -23,41 +23,25 @@ class RentalRepository extends Repository
         return $this->readById(Rental::class, $id);
     }
 
-
-
-    public function getByUserId(int $user_id): array
+    public function getByUserId(int $userId): array
     {
-        $query = sprintf(
-            'SELECT * FROM `%s` WHERE user_id=:user_id',
-            $this->getTableName()
-        );
-
+        $query = 'SELECT * FROM rentals WHERE user_id = :user_id';
         $sth = $this->pdo->prepare($query);
-
-        // Si la préparation échoue
-        if (! $sth) {
-            return null;
+        $sth->execute(['user_id' => $userId]);
+    
+        $results = $sth->fetchAll();
+        $rentals = [];
+    
+        foreach ($results as $result) {
+            $rental = new Rental();
+            $rental->setId($result['id']);
+            $rental->setAccommodationId($result['accommodation_id']);
+            $rental->setDateStart(new \DateTime($result['date_start'])); // Conversion ici
+            $rental->setDateEnd(new \DateTime($result['date_end']));     // Conversion ici
+            $rentals[] = $rental;
         }
-
-        $success = $sth->execute(['user_id' => $user_id]);
-
-        // Si echec
-        if (! $success) {
-            return null;
-        }
-
-        // Récupération du premier résultat
-        $object_data = $sth->fetch();
-
-        // Récupération des résultats
-        $data = [];
-
-        while ($object_data = $sth->fetch()) {
-            $rental = new Rental($object_data);
-            $data[] = $rental;
-        }
-
-        return $data;
+    
+        return $rentals;
     }
 
     public function create(Rental $rental): ?Rental
@@ -79,7 +63,7 @@ class RentalRepository extends Repository
         $date_start = $rental->getDateStart()->format('Y-m-d H:i:s');
         $date_end = $rental->getDateEnd()->format('Y-m-d H:i:s');
 
-        
+
 
         $success = $sth->execute([
             'user_id' => $_SESSION['user']->getId(),
