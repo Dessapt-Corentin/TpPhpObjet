@@ -2,7 +2,7 @@
 
 namespace App\Model\Entity;
 
-use DateTime;
+use \DateTime;
 use Symplefony\Model\Entity;
 
 class Rental extends Entity
@@ -13,23 +13,24 @@ class Rental extends Entity
         return $this->id;
     }
 
-    protected DateTime $date_start;
-    protected DateTime $date_end;
-
-    public function getDateStart(): DateTime
+    protected \DateTime $date_start;
+    
+    public function getDateStart(): \DateTime
     {
         return $this->date_start;
     }
-    public function setDateStart(DateTime $date_start): self
+    public function setDateStart(\DateTime $date_start): self
     {
         $this->date_start = $date_start;
         return $this;
     }
-    public function getDateEnd(): DateTime
+    
+    protected \DateTime $date_end;
+    public function getDateEnd(): \DateTime
     {
         return $this->date_end;
     }
-    public function setDateEnd(DateTime $date_end): self
+    public function setDateEnd(\DateTime $date_end): self
     {
         $this->date_end = $date_end;
         return $this;

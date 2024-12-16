@@ -27,11 +27,25 @@ class RentalController extends Controller
     {
         $rental_data = $request->getParsedBody();
 
-        $rental_data['date_start'] = date('Y-m-d H:i:s', strtotime($rental_data['date_start']));
-        $rental_data['date_end'] = date('Y-m-d H:i:s', strtotime($rental_data['date_end']));
-        $rental_data['user_id'] = $_SESSION['user']->getId();
+        $accommodation_id = $rental_data['accommodation_id'];
+        $accommodation = RepoManager::getRM()->getAccommodationRepo()->getById($accommodation_id);
+
+        if (!$accommodation) {
+            $this->redirect('/');
+        }
+
+        $date_start = date('Y-m-d H:i:s', strtotime($rental_data['date_start']));
+        $date_end = date('Y-m-d H:i:s', strtotime($rental_data['date_end']));
+        $user_id = $_SESSION['user']->getId();
 
         $rental = new Rental();
+
+        $rental->setAccommodationId($accommodation_id);
+
+        $rental->setDateStart(new \DateTime($date_start));
+        $rental->setDateEnd(new \DateTime($date_end));
+        $rental->setUserId($user_id);
+
         RepoManager::getRM()->getRentalRepo()->create($rental);
 
         $this->redirect('/');

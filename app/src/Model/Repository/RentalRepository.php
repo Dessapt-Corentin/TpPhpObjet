@@ -4,6 +4,7 @@ namespace App\Model\Repository;
 
 use App\Model\Entity\Rental;
 use Symplefony\Model\Repository;
+use DateTime;
 
 class RentalRepository extends Repository
 {
@@ -62,7 +63,7 @@ class RentalRepository extends Repository
     public function create(Rental $rental): ?Rental
     {
         $query = sprintf(
-            'INSERT INTO `%s` (user_id, accommodation_id, start_date, end_date) VALUES (:user_id, :accommodation_id, :start_date, :end_date)',
+            'INSERT INTO `%s` (user_id, accommodation_id, date_start, date_end) VALUES (:user_id, :accommodation_id, :date_start, :date_end)',
             $this->getTableName()
         );
 
@@ -74,13 +75,17 @@ class RentalRepository extends Repository
         }
 
         //ToDO reformater les dates
+        // Formater string en date
+        $date_start = $rental->getDateStart()->format('Y-m-d H:i:s');
+        $date_end = $rental->getDateEnd()->format('Y-m-d H:i:s');
 
+        
 
         $success = $sth->execute([
             'user_id' => $_SESSION['user']->getId(),
             'accommodation_id' => $rental->getAccommodationId(),
-            'start_date' => $rental->getDateStart(),
-            'end_date' => $rental->getDateEnd()
+            'date_start' => $date_start,
+            'date_end' => $date_end
         ]);
 
         // Si echec
