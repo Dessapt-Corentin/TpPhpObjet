@@ -2,20 +2,19 @@
     <button><a href="/">🏠 Retour</a></button>
 </div>
 
-<h1>Ajouter une location</h1>
-
-<form action="/users/create-rental" method="post">
+<form action="/users/create-rental/<?php echo $accommodation->getId(); ?>" method="post" novalidate>
     <h2>Formulaire de location</h2>
 
-    <input type="hidden" id="user_id" name="user_id" value="<?php echo $_SESSION['user']->getId(); ?>">
+    <div>
+        <input type="hidden" id="user_id" name="user_id" value="<?php echo $_SESSION['user']->getId(); ?>">
+    </div>
 
-    <!-- Je veux récupérer l'id de l'accommodation -->
-    <?php if (isset($accommodation)): ?>
+    <!-- Récupérer l'id de l'accommodation à louer il est deja présent dans l'url -->
+    <div>
         <input type="hidden" id="accommodation_id" name="accommodation_id" value="<?php echo $accommodation->getId(); ?>">
-    <?php else: ?>
-        <p>Erreur: L'accommodation n'est pas définie.</p>
-    <?php endif; ?>
-    
+    </div>
+
+
     <div>
         <label for="date_start">Date de début :</label>
         <input type="datetime-local" id="date_start" name="date_start" required>

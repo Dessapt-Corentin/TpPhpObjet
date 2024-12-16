@@ -2,7 +2,9 @@
 
 namespace App\Model\Entity;
 
+use App\Model\Repository\RepoManager;
 use Symplefony\Model\Entity;
+use App\Model\Repository\EquipmentRepository;
 
 class Accommodation extends Entity
 {
@@ -56,7 +58,7 @@ class Accommodation extends Entity
         return $this;
     }
 
-    protected string $description ;
+    protected string $description;
     public function getDescription(): string
     {
         return $this->description;
@@ -108,6 +110,61 @@ class Accommodation extends Entity
     public function setLabel(?string $value): self
     {
         $this->label = $value;
+        return $this;
+    }
+
+    protected ?string $accommodation_id = null;
+    public function getAccommodationId(): ?string
+    {
+        return $this->accommodation_id;
+    }
+
+    public function setAccommodationId(?string $value): self
+    {
+        $this->accommodation_id = $value;
+        return $this;
+    }
+
+    // Liaison avec la table adresse
+    protected Adresse $adresse;
+    public function getAdress(): Adresse
+    {
+        if (!isset($this->adresse)) {
+            $this->adresse = RepoManager::getRM()->getAdresseRepo()->getById($this->adresse_id);
+        }
+        return $this->adresse;
+    }
+
+    public function setAdress(Adresse $adresse): self
+    {
+        $this->adresse = $adresse;
+        return $this;
+    }
+
+
+
+    // Liaison avec la table equipment
+    protected array $equipments;
+    public function getEquipments(): array
+    {
+        if (!isset($this->equipments)) {
+            $this->equipments = RepoManager::getRM()->getEquipmentRepo()->getAllForEquipment($this->id);
+        }
+        return $this->equipments;
+    }
+
+    public function addEquipments(array $ids_equipments): self
+    {
+        $equipment_repo = RepoManager::getRM()->getEquipmentRepo();
+
+        $equipment_repo->detachAllForEquipment($this->id);
+
+        if (empty($ids_equipments)) {
+            return $this;
+        }
+
+        $equipment_repo->attachForEquipment($this->id, $ids_equipments);
+
         return $this;
     }
 }

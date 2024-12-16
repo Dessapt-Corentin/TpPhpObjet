@@ -12,10 +12,21 @@ class Equipment extends Entity
         return $this->id;
     }
 
+    public function setId(int $value): self
+    {
+        $this->id = $value;
+        return $this;
+    }
+
     protected string $label;
     public function getEquipment()
     {
         return $this->label;
     }
 
+    public function setEquipment(string $value): self
+    {
+        $this->label = $value;
+        return $this;
+    }
 }

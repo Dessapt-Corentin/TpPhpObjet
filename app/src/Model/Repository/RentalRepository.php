@@ -17,10 +17,12 @@ class RentalRepository extends Repository
         return $this->readAll(Rental::class);
     }
 
-    public function getById(int $user_id): ?Rental
+    public function getById(int $id): ?Rental
     {
-        return $this->readById(Rental::class, $user_id);
+        return $this->readById(Rental::class, $id);
     }
+
+
 
     public function getByUserId(int $user_id): array
     {
@@ -42,7 +44,7 @@ class RentalRepository extends Repository
         if (! $success) {
             return null;
         }
-        
+
         // Récupération du premier résultat
         $object_data = $sth->fetch();
 
@@ -56,12 +58,11 @@ class RentalRepository extends Repository
 
         return $data;
     }
+
     public function create(Rental $rental): ?Rental
     {
         $query = sprintf(
-            'INSERT INTO `%s`
-            (user_id, accommodation_id, date_start, date_end)
-            VALUES (:user_id, :accommodation_id, :date_start, :date_end)',
+            'INSERT INTO `%s` (user_id, accommodation_id, start_date, end_date) VALUES (:user_id, :accommodation_id, :start_date, :end_date)',
             $this->getTableName()
         );
 
@@ -72,20 +73,23 @@ class RentalRepository extends Repository
             return null;
         }
 
+        //ToDO reformater les dates
+
+
         $success = $sth->execute([
-            'user_id' => $rental->getUserId(),
-            'accommodation_id' => (int) $rental->getAccommodationId(),
-            'date_start' => $rental->getDateStart()->format('Y-m-d H:i:s'),
-            'date_end' => $rental->getDateEnd()->format('Y-m-d H:i:s'),
+            'user_id' => $_SESSION['user']->getId(),
+            'accommodation_id' => $rental->getAccommodationId(),
+            'start_date' => $rental->getDateStart(),
+            'end_date' => $rental->getDateEnd()
         ]);
 
-        // Si echec de l'insertion
+        // Si echec
         if (! $success) {
             return null;
         }
 
-        // Ajout de l'id de l'item créé en base de données
-        $rental->setId($this->pdo->lastInsertId());
+        // On récupère l'id de l'objet créé
+        $rental->setId((int) $this->pdo->lastInsertId());
 
         return $rental;
     }

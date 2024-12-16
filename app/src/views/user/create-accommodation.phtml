@@ -1,5 +1,5 @@
 <div>
-<button><a href="/">🔙 Retour</a></button>
+    <button><a href="/">🔙 Retour</a></button>
 </div>
 
 <h1>Ajouter une location</h1>
@@ -45,23 +45,23 @@
         <input type="text" name="description" id="input-description">
     </div>
     <!-- div pour select les equipments disponibles -->
-    <div>
-        <label for="select-equipment">Equipements :</label>
-        <select name="equipment[]" id="select-equipment" multiple>
-            <option value="">Choisissez...</option>
-            <!-- Insertion des éléments des équipements -->
-            <?php foreach ($equipments as $equipment) : ?>
-            <option value="<?= $equipment->getId() ?>"><?= $equipment->getEquipment() ?></option>
-            <?php endforeach; ?>
-        </select>
-    </div>
+    <fieldset>
+        <legend>Equipement</legend>
+        <?php foreach ($equipments as $equipment) : ?>
+            <div>
+                <input type="checkbox" name="equipments[]" value="<?= $equipment->getId() ?>" id="input-equipment-<?= $equipment->getId() ?>">
+                <label for="input-equipment-<?= $equipment->getId() ?>"><?= $equipment->getEquipment() ?></label>
+            </div>
+        <?php endforeach; ?>
+
+    </fieldset>
     <div>
         <label for="input-beds">Couchages :</label>
         <input type="number" name="beds" id="input-beds">
     </div>
     <div>
-    <label for="input-image">Image :</label>
-    <input type="file" name="image" id="input-image">
+        <label for="input-image">Image :</label>
+        <input type="file" name="image" id="input-image">
     </div>
     <div>
         <input type="submit" value="Ajouter">

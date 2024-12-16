@@ -14,6 +14,8 @@ if (!empty($accommodations)): ?>
         <?php foreach ($accommodations as $accommodation): ?>
             <li>
                 <ul>
+                    <li>country : <?php echo $accommodation->getAdress()->getCity() ?></li>
+                    <li>city : <?php echo $accommodation->getAdress()->getCountry() ?></li>
                     <li>price : <?php echo $accommodation->getPrice() ?></li>
                     <li>size : <?php echo $accommodation->getSize() ?></li>
                     <li>description : <?php echo $accommodation->getDescription() ?></li>

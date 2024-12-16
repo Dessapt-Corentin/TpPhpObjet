@@ -47,13 +47,6 @@ class AccommodationController extends Controller
             'owner_id' => $_SESSION['user']->getId()
         ];
 
-        $accommodation_id = RepoManager::getRM()->getAccommodationRepo()->create($data_accommodation);
-        $data_accommodation_equipments = [
-            'accommodation_id' => $accommodation_id,
-            'equipments_id' => $accommodation_data['equipments_id'] ?? null
-        ];
-
-
         RepoManager::getRM()->getAccommodationRepo()->create($data_accommodation);
         $this->redirect('/');
     }

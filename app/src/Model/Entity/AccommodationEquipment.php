@@ -27,4 +27,5 @@ class AccommodationEquipment extends Entity
         $this->equipments_id = $value;
         return $this;
     }
+    
 }

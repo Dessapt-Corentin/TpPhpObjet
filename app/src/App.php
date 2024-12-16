@@ -76,11 +76,9 @@ final class App
         $this->router->post('/users/addaccommodation', [AccommodationController::class, 'createAccommodation']);
         $this->router->get('/users/listaccomodation/{id}', [AccommodationController::class, 'list']);
 
-        $this->router->get('/users/create-rental', [RentalController::class, 'addRental']);
-        $this->router->post('/users/create-rental', [RentalController::class, 'createRental']);
+        $this->router->get('/users/create-rental/{id}', [RentalController::class, 'addRental']);
+        $this->router->post('/users/create-rental/{id}', [RentalController::class, 'createRental']);
         $this->router->get('/users/list-rental/{id}', [RentalController::class, 'list']);
-
-        
     }
 
     // Démarrage du routeur

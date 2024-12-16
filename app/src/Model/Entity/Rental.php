@@ -15,11 +15,7 @@ class Rental extends Entity
 
     protected DateTime $date_start;
     protected DateTime $date_end;
-    public function __construct()
-    {
-        $this->date_start = new DateTime();
-        $this->date_end = new DateTime();
-    }
+
     public function getDateStart(): DateTime
     {
         return $this->date_start;
@@ -59,5 +55,5 @@ class Rental extends Entity
     {
         $this->accommodation_id = $value;
         return $this;
-}
+    }
 }
