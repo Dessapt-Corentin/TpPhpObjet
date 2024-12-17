@@ -125,15 +125,15 @@ class Accommodation extends Entity
         return $this;
     }
 
-    protected ?string $equipment_id = null;
+    protected ?string $equipments_id = null;
     public function getEquipmentId(): ?string
     {
-        return $this->equipment_id;
+        return $this->equipments_id;
     }
 
     public function setEquipmentId(?string $value): self
     {
-        $this->equipment_id = $value;
+        $this->equipments_id = $value;
         return $this;
     }
 

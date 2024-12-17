@@ -28,10 +28,10 @@ class RentalRepository extends Repository
         $query = 'SELECT * FROM rentals WHERE user_id = :user_id';
         $sth = $this->pdo->prepare($query);
         $sth->execute(['user_id' => $userId]);
-    
+
         $results = $sth->fetchAll();
         $rentals = [];
-    
+
         foreach ($results as $result) {
             $rental = new Rental();
             $rental->setId($result['id']);
@@ -40,7 +40,7 @@ class RentalRepository extends Repository
             $rental->setDateEnd(new \DateTime($result['date_end']));     // Conversion ici
             $rentals[] = $rental;
         }
-    
+
         return $rentals;
     }
 
@@ -58,7 +58,6 @@ class RentalRepository extends Repository
             return null;
         }
 
-        //ToDO reformater les dates
         // Formater string en date
         $date_start = $rental->getDateStart()->format('Y-m-d H:i:s');
         $date_end = $rental->getDateEnd()->format('Y-m-d H:i:s');

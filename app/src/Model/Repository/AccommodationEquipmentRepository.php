@@ -20,9 +20,16 @@ class AccommodationEquipmentRepository extends Repository
     }
 
     // Récupérer l'id de l'accommodations pour la mettre dans la table accommodations_equipments
-    public function getById(int $id): ?AccommodationEquipment
+    public function getById(int $accommodation_id): ?AccommodationEquipment
     {
-        return $this->readById(AccommodationEquipment::class, $id);
+        $query = sprintf(
+            'SELECT * FROM `%s` WHERE accommodation_id=:accommodation_id',
+            $this->getTableName()
+        );
+
+        $sth = $this->pdo->prepare($query);
+        $sth->execute(['accommodation_id' => $accommodation_id]);
+        return $sth->fetchObject(AccommodationEquipment::class) ?: null;
     }
 
     // Récupérer les équipements d'un seul accommodation par son accommodation ID
@@ -40,14 +47,17 @@ class AccommodationEquipmentRepository extends Repository
 
     public function create(array $accommodationEquipment): ?AccommodationEquipment
     {
-        // j'ai besoin de retourner un objet AccommodationEquipment
-        // 1. Insérer les données de accommodation dans la table accommodations_equipments
-        $queryAccommodationEquipment = 'INSERT INTO accommodations_equipments (accommodation_id, equipment_id)
-        VALUES (:accommodation_id, :equipment_id)';
-        $stmtAccommodationEquipment = $this->pdo->prepare($queryAccommodationEquipment);
-        $stmtAccommodationEquipment->execute($accommodationEquipment);
+        // Insert the accommodation equipment data into the accommodations_equipments table
+        $query = 'INSERT INTO accommodations_equipments (accommodation_id, equipments_id)
+                  VALUES (:accommodation_id, :equipments_id)';
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([
+            'accommodation_id' => $accommodationEquipment['accommodation_id'],
+            'equipments_id' => $accommodationEquipment['equipments_id']
+        ]);
 
-        // 2. Récupérer l'ID de l'accommodation inséré
-        return $this->getById($this->pdo->lastInsertId());
+        // Retrieve the ID of the inserted accommodation equipment
+        $id = $this->pdo->lastInsertId();
+        return $this->getById($id);
     }
 }

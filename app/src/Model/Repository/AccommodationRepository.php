@@ -25,7 +25,7 @@ class AccommodationRepository extends Repository
         $queryCheck = 'SELECT * FROM accommodations WHERE adresse_id = :adresse_id AND owner_id = :owner_id';
         $stmtCheck = $this->pdo->prepare($queryCheck);
         $stmtCheck->execute(['adresse_id' => $accommodation['adresse_id'], 'owner_id' => $accommodation['owner_id']]);
-        
+
         if ($stmtCheck->fetch()) {
             // Accommodation already exists
             return null;
@@ -92,9 +92,9 @@ class AccommodationRepository extends Repository
     public function getAllForAccommodation(int $id): array
     {
         $query = sprintf(
-            'SELECT c.* FROM `%1$s` as c 
-                JOIN `%2$s` as cc ON cc.equipments_id = c.id
-                WHERE cc.accommodation_id=:id',
+            'SELECT e.* FROM `%1$s` as e 
+                JOIN `%2$s` as ae ON ae.equipments_id = e.id
+                WHERE ae.accommodation_id=:id',
             $this->getTableName(),
             $this->getMappingAccommodation()
         );

@@ -46,16 +46,15 @@ class AccommodationController extends Controller
             'owner_id' => $_SESSION['user']->getId()
         ];
 
-        $accommodation_id = RepoManager::getRM()->getAccommodationRepo()->create($data_accommodation);
+        $accommodation = RepoManager::getRM()->getAccommodationRepo()->create($data_accommodation);
 
-        // Insert into accommodations_equipments table
-        if (isset($accommodation_data['equipments']) && is_array($accommodation_data['equipments'])) {
-            foreach ($accommodation_data['equipments'] as $equipment_id) {
-                RepoManager::getRM()->getAccommodationEquipmentRepo()->create([
-                    'accommodation_id' => $accommodation_id,
-                    'equipment_id' => $equipment_id
-                ]);
-            }
+        $equipments = $accommodation_data['equipments'];
+        foreach ($equipments as $equipment) {
+            $data_accommodation_equipment = [
+                'accommodation_id' => $accommodation->getId(),
+                'equipments_id' => $equipment
+            ];
+            RepoManager::getRM()->getAccommodationEquipmentRepo()->create($data_accommodation_equipment);
         }
 
         $this->redirect('/');
