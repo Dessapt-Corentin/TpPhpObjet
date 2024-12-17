@@ -1,4 +1,4 @@
-Airbnb est une application de location de bien entre particuliers .
+Easyloc est une application de location de bien entre particuliers .
 Les fonctionnalités souhaitées sont les suivantes :
 -- Nous avons deux types d'utilisateurs : 
 - La personne souhaitant louer "un" bien ,

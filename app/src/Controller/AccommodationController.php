@@ -16,7 +16,7 @@ class AccommodationController extends Controller
         $view = new View('user:create-accommodation');
         $type_accommodation = RepoManager::getRM()->getTypeAccommodationRepo()->getAll();
         $data = [
-            'title' => 'Ajouter un bien',
+            'title' => 'Ajouter un bien - Easyloc.com',
             'types_accommodations' => $type_accommodation,
             'equipments' => RepoManager::getRM()->getEquipmentRepo()->getAll()
         ];
@@ -67,7 +67,7 @@ class AccommodationController extends Controller
         $view = new View('user:list-accommodation');
         $accommodations = RepoManager::getRM()->getAccommodationRepo()->getByOwnerId($id);
         $data = [
-            'title' => 'Mes biens',
+            'title' => 'Mes biens - Easyloc.com',
             'accommodations' => $accommodations
         ];
         $view->render($data);

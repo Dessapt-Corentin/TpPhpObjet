@@ -18,7 +18,7 @@ class UserController extends Controller
     {
         $view = new View('user:create-account');
         $data = [
-            'title' => 'Créer mon compte - Airbnb.com'
+            'title' => 'Créer mon compte - Easyloc.com'
         ];
         $view->render($data);
     }
@@ -44,7 +44,7 @@ class UserController extends Controller
     {
         $view = new View('user:login');
         $data = [
-            'title' => 'Connexion - Airbnb.com'
+            'title' => 'Connexion - Easyloc.com'
         ];
         $view->render($data);
     }
@@ -102,54 +102,4 @@ class UserController extends Controller
         $this->redirect('/');
     }
 
-// public function index(): void
-// {
-//     $view = new View('page:home');
-//     $data = [
-//         'title' => 'Accueil - Airbnb.com',
-//         'users' => RepoManager::getRM()->getUserRepo()->getAll()
-//     ];
-//     $view->render($data);
-// }
-
-
-// public function profil(): void
-// {
-//     $view = new View('user:profil');
-//     $data = [
-//         'title' => 'Mon profil - Airbnb.com',
-        
-//     ];
-//     $view->render($data);
-// }
-
-// /**
-//  * Méthode(fonction) qui permet de sécuriser les données reçues par un formulaire
-//  * @param string $data
-//  * @return string
-//  */
-// function secureData($data): string
-// {
-//     return htmlspecialchars(stripslashes(trim($data)));
-// }
-
-// /**
-//  * methode qui verifie le format de l'email
-//  * @param string $email
-//  * @return bool
-//  */
-// function validEmail(string $email): bool
-// {
-//     return filter_var($email, FILTER_VALIDATE_EMAIL);
-// }
-
-// /**
-//  * methode qui verifie le format du mot de passe (au moins 8 caractères, une majuscule, une minuscule, un chiffre)
-//  * @param string $email
-//  * @return bool
-//  */
-// function validPassword(string $password): bool
-// {
-//     return preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/', $password);
-// }
 }

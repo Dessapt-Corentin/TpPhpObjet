@@ -1,4 +1,4 @@
-<h1>Bienvenue sur Airbnb</h1>
+<h1>Bienvenue sur Easyloc</h1>
 
 <?php
 // On veux cacher les bouttons une fois connecté
@@ -18,23 +18,24 @@ if ($firstname == '') {
 <?php
 } else {
 ?>
-    <div>
-        <!-- <li><a href="/profil">Mon profil</a></li> -->
-        <button><a href="/users/listaccomodation/<?php echo $_SESSION['user']->getId() ?>">Voir mes annonces</a></button>
-        <button><a href="/users/list-rental/<?php echo $_SESSION['user']->getId() ?>">Mes Réservations</a></button>
-        <button><a href="/users/addaccommodation">Ajouter une location</a></button>
-        <button><a href="/users/list-who-reserve">Voir les réservations</a></button>
-        <button><a href="/users/logout">Se déconnecter</a></button>
-    </div>
-
+    <nav>
+        <div class="navbar">
+            <!-- <li><a href="/profil">Mon profil</a></li> -->
+            <button><a href="/users/listaccomodation/<?php echo $_SESSION['user']->getId() ?>">Voir mes annonces</a></button>
+            <button><a href="/users/list-rental/<?php echo $_SESSION['user']->getId() ?>">Mes Réservations</a></button>
+            <button><a href="/users/addaccommodation">Ajouter une location</a></button>
+            <button><a href="/users/list-who-reserve">Voir les réservations</a></button>
+            <button><a href="/users/logout">Se déconnecter</a></button>
+        </div>
+    </nav>
 <?php
 }
 ?>
 <h2> Locations </h2>
 <?php
-
-?>
-<p>Bonjour <?php echo htmlspecialchars($firstname); ?></p>
+if ($firstname != ''): ?>
+    <p>Bonjour <?php echo htmlspecialchars($firstname); ?></p>
+<?php endif; ?>
 <div class="card" style="width: 18rem;">
     <?php
     if (!empty($accommodations)) : ?>
@@ -43,13 +44,13 @@ if ($firstname == '') {
                 <div class="accommodation-item">
                     <p>
                     <ul>
-                        <li>country : <?php echo $accommodation->getAdress()->getCity() ?></li>
-                        <li>city : <?php echo $accommodation->getAdress()->getCountry() ?></li>
-                        <li>price : <?php echo $accommodation->getPrice() ?></li>
+                        <li>Pays : <?php echo $accommodation->getAdress()->getCity() ?></li>
+                        <li>Ville : <?php echo $accommodation->getAdress()->getCountry() ?></li>
+                        <li>Prix : <?php echo $accommodation->getPrice() ?> /nuit</li>
                         <li>id_type : <?php echo $accommodation->getIdType() ?></li>
-                        <li>size : <?php echo $accommodation->getSize() ?></li>
-                        <li>description : <?php echo $accommodation->getDescription() ?></li>
-                        <li>beds : <?php echo $accommodation->getBeds() ?></li>
+                        <li>Taille : <?php echo $accommodation->getSize() ?> /m²</li>
+                        <li>Description : <?php echo $accommodation->getDescription() ?></li>
+                        <li>Couchages : <?php echo $accommodation->getBeds() ?></li>
                         <li>image : <?php echo $accommodation->getImage() ?> </li>
                         <li>
                             <?php if (isset($_SESSION['user'])): ?>

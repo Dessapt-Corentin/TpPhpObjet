@@ -16,7 +16,7 @@ class RentalController extends Controller
         $view = new View('user:create-rental');
         $accommodation = RepoManager::getRM()->getAccommodationRepo()->getById($id);
         $data = [
-            'title' => 'Créer une location - Airbnb.com',
+            'title' => 'Créer une location - Easyloc.com',
             'accommodation' => $accommodation
         ];
         $view->render($data);
@@ -61,7 +61,7 @@ class RentalController extends Controller
             $rental->setDateEnd($rental->getDateEnd());
         }
         $data = [
-            'title' => 'Mes locations',
+            'title' => 'Mes locations - Easyloc.com',
             'rentals' => $rentals
         ];
 
@@ -78,7 +78,7 @@ class RentalController extends Controller
             $rental->setDateEnd($rental->getDateEnd());
         }
         $data = [
-            'title' => 'Mes locations de biens',
+            'title' => 'Mes locations de biens - Easyloc.com',
             'rentals' => $rentals
         ];
 

@@ -1,6 +1,8 @@
-<div>
-    <button><a href="/">🏠 Retour</a></button>
-</div>
+<nav>
+    <div>
+        <button><a href="/">🏠 Retour</a></button>
+    </div>
+</nav>
 
 <h1>Mes annonces</h1>
 
@@ -10,22 +12,21 @@
 
 <?php
 if (!empty($accommodations)): ?>
-    <ul>
+    <div class="accommodations-list">
         <?php foreach ($accommodations as $accommodation): ?>
-            <li>
+            <div class="accommodation-item2">
                 <ul>
-                    <li>country : <?php echo $accommodation->getAdress()->getCity() ?></li>
-                    <li>city : <?php echo $accommodation->getAdress()->getCountry() ?></li>
-                    <li>price : <?php echo $accommodation->getPrice() ?></li>
-                    <li>size : <?php echo $accommodation->getSize() ?></li>
-                    <li>description : <?php echo $accommodation->getDescription() ?></li>
-                    <li>beds : <?php echo $accommodation->getBeds() ?></li>
+                    <li>Pays : <?php echo $accommodation->getAdress()->getCity() ?></li>
+                    <li>Ville : <?php echo $accommodation->getAdress()->getCountry() ?></li>
+                    <li>Prix : <?php echo $accommodation->getPrice() ?></li>
+                    <li>Taille : <?php echo $accommodation->getSize() ?></li>
+                    <li>Description : <?php echo $accommodation->getDescription() ?></li>
+                    <li>Couchages : <?php echo $accommodation->getBeds() ?></li>
                     <li>image : <?php echo $accommodation->getImage() ?> </li>
-                    <li><a href="/users/create-rental">Louer</a></li>
                 </ul>
-            </li>
+            </div>
         <?php endforeach ?>
-    </ul>
+    </div>
 <?php else: ?>
     <div>Vous avez aucune annonce définie.</div>
 <?php endif ?>

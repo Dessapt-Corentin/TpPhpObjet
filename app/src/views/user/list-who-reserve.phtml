@@ -1,14 +1,16 @@
-<div>
-    <button><a href="/">🏠 Retour</a></button>
-</div>
+<nav>
+    <div>
+        <button><a href="/">🏠 Retour</a></button>
+    </div>
+</nav>
 
 <h1>Les réservations de mes biens</h1>
 
 <?php
 if (!empty($rentals)) : ?>
-    <div class="rentals-list">
+    <div class="accommodations-list">
         <?php foreach ($rentals as $rental) : ?>
-            <div class="rental-item">
+            <div class="accommodation-item2">
                 <p>
                 <ul>
                     <li>id_accommodation : <?php echo $rental->getAccommodationId() ?></li>

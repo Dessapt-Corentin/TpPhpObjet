@@ -16,7 +16,7 @@ class PageController extends Controller
         $accommodations = RepoManager::getRM()->getAccommodationRepo()->getAll();
 
         $data = [
-            'title' => 'Accueil - Airbnb.com',
+            'title' => 'Accueil - Easyloc.com',
             'accommodations' => $accommodations
         ];
 

@@ -1,78 +1,186 @@
-* {
-  box-sizing: border-box;
-  text-decoration: none;
-  color: #484848;
-}
-
-/* Styles généraux */
 body {
   font-family: Arial, sans-serif;
-  line-height: 1.6;
-  color: #484848;
-  background-color: #f7f7f7;
   margin: 0;
   padding: 0;
+  background-color: #f5f5f5;
 }
 
-
-li {
-  list-style-type: none;
-  color: #484848;
-  background-color:#050024 ;
+.content-wrapper {
+  display: flex;
+  height: auto; /* Permet au contenu de s'étendre selon le contenu */
 }
 
-ul {
-  padding: 0;
-  background-color:#f7f7f7;
-  color: #ffffff;
-}
-
-/* Titres */
-h1, h2, h3 {
-  color: #484848;
-}
-
-h1 {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-}
-
-h2 {
-  font-size: 2rem;
-  margin-bottom: 15px;
-}
-
-h3 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-}
-
-label {
-  font-weight: bold;
-  color: #ffffff;
-}
-
-/* Formulaires */
-form {
-  background-color: #050024;
+.sidebar {
+  width: 300px; /* Largeur fixe pour la barre latérale */
+  height: 100%; /* Hauteur de la barre latérale */
+  overflow-y: auto; /* Permet le défilement si le contenu dépasse */
+  position: fixed; /* Position fixe pour la barre latérale */
+  left: 0;
+  top: 0;
+  background-color: #fff;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
 }
 
-/* class="accommodation-item" */
-.accommodation-item {
-  background-color: #050024;
+.main-content {
+  margin-left: 300px; /* Correspond à la largeur de la barre latérale */
   padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin: 10px;
-  height: 330px;
-  width: 300px;
+  width: calc(100% - 300px); /* Ajuste la largeur du contenu principal */
+}
+
+h1, h2 {
+  color: #484848;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: flex;
+  gap: 30px;
+}
+
+button {
+  background-color: #003366; /* Couleur bleu foncé */
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 4px; 
+  height: 40px; /* Hauteur fixe pour les boutons */
+  width: 150px; /* Largeur fixe pour les boutons */
+  margin: 20px;
+}
+
+button a {
+  color: white;
+  text-decoration: none;
 }
 
 .accommodations-list {
-display: flex;
-flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(350px, 1fr)); /* Quatre colonnes avec taille minimale */
+  gap: 20px; /* Espacement entre les vignettes */
+}
+
+.accommodation-item2 {
+  background-color: white;
+  border-radius: 8px;
+  
+   /* Fixer la taille pour toutes les vignettes */
+   width: calc(100% - (20px * (4 -1))); /* Ajuste pour l'espacement entre les vignettes */
+   height: 150px; /* Hauteur fixe pour toutes les vignettes */
+
+   padding:15px; 
+   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+   display: flex; 
+   flex-direction: column; 
+}
+
+.accommodation-item3 {
+  background-color: white;
+  border-radius: 8px;
+  
+   /* Fixer la taille pour toutes les vignettes */
+   width: calc(100% - (20px * (4 -1))); /* Ajuste pour l'espacement entre les vignettes */
+   height: 70px; /* Hauteur fixe pour toutes les vignettes */
+
+   padding:15px; 
+   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+   display: flex; 
+   flex-direction: column; 
+}
+
+.accommodation-item3 ul {
+    list-style-type: none; 
+    padding:0; 
+    flex-grow:1; 
+}
+
+.accommodation-item2 ul {
+    list-style-type: none; 
+    padding:0; 
+    flex-grow:1; 
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  
+}
+
+button[type="submit"], input[type="submit"] {
+  background-color: #003366; /* Couleur bleu foncé */
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 4px; 
+  height: 40px; /* Hauteur fixe pour les boutons */
+  width: 150px; /* Largeur fixe pour les boutons */
+  margin: 20px;
+}
+
+.accommodation-item {
+  background-color: white;
+  border-radius: 8px;
+  
+   /* Fixer la taille pour toutes les vignettes */
+   width: calc(100% - (20px * (4 -1))); /* Ajuste pour l'espacement entre les vignettes */
+   height: 350px; /* Hauteur fixe pour toutes les vignettes */
+
+   padding:15px; 
+   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+   display: flex; 
+   flex-direction: column; 
+}
+
+.accommodation-item ul {
+    list-style-type: none; 
+    padding:0; 
+    flex-grow:1; 
+}
+
+.accommodation-item li {
+    margin-bottom:5px; 
+}
+
+.accommodation-item button {
+    margin-top:auto; 
+}
+
+@media (max-width:1200px) {
+    .sidebar {
+        width:250px; 
+    }
+    .main-content {
+        margin-left:250px; 
+        width:calc(100% -250px); 
+    }
+    .accommodations-list {
+        grid-template-columns: repeat(3, minmax(350px,1fr)); /* Trois colonnes sur écrans moyens */
+    }
+}
+
+@media (max-width:900px) {
+    .content-wrapper {
+        flex-direction:column; 
+    }
+    .sidebar {
+        width:auto; 
+        height:auto; 
+        position:absolute; 
+    }
+    .main-content {
+        margin-left:auto; 
+        width:auto; 
+    }
+    .accommodations-list {
+        grid-template-columns: repeat(2, minmax(350px,1fr)); /* Deux colonnes sur écrans plus petits */
+    }
+}
+
+@media (max-width:600px) {
+    .accommodations-list {
+        grid-template-columns:1fr; /* Une colonne sur petits écrans */
+    }
 }
