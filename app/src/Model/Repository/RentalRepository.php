@@ -12,6 +12,10 @@ class RentalRepository extends Repository
     {
         return 'rentals';
     }
+    private function getMappingAccommodation(): string
+    {
+        return 'accommodations';
+    }
 
     public function getAll(): array
     {
@@ -80,5 +84,26 @@ class RentalRepository extends Repository
         $rental->setId((int) $this->pdo->lastInsertId());
 
         return $rental;
+    }
+
+    public function getAllForOwner(): array
+    {
+        $query = 'SELECT * FROM rentals r JOIN accommodations a ON r.accommodation_id = a.id WHERE a.owner_id = :owner_id';
+        $sth = $this->pdo->prepare($query);
+        $sth->execute(['owner_id' => $_SESSION['user']->getId()]);
+
+        $results = $sth->fetchAll();
+        $rentals = [];
+
+        foreach ($results as $result) {
+            $rental = new Rental();
+            $rental->setId($result['id']);
+            $rental->setAccommodationId($result['accommodation_id']);
+            $rental->setDateStart(new \DateTime($result['date_start'])); // Conversion ici
+            $rental->setDateEnd(new \DateTime($result['date_end']));     // Conversion ici
+            $rentals[] = $rental;
+        }
+
+        return $rentals;
     }
 }

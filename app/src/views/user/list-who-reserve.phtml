@@ -1,0 +1,26 @@
+<div>
+    <button><a href="/">🏠 Retour</a></button>
+</div>
+
+<h1>Les réservations de mes biens</h1>
+
+<?php
+if (!empty($rentals)) : ?>
+    <div class="rentals-list">
+        <?php foreach ($rentals as $rental) : ?>
+            <div class="rental-item">
+                <p>
+                <ul>
+                    <li>id_accommodation : <?php echo $rental->getAccommodationId() ?></li>
+                    <li>id_user : <?php echo $_SESSION['user']->getId() ?></li>
+                    <li>date_start : <?php echo $rental->getDateStart()->format('Y-m-d H:i:s'); ?></li>
+                    <li>date_end : <?php echo $rental->getDateEnd()->format('Y-m-d H:i:s'); ?></li>
+                </ul>
+                </p>
+            </div>
+        <?php endforeach ?>
+    </div>
+
+<?php else : ?>
+    <div>Aucune réservation disponible</div>
+<?php endif; ?>

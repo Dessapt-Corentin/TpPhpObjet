@@ -62,7 +62,7 @@ class AccommodationController extends Controller
 
 
     // Biens: Liste pour un utilisateur connecté
-    public function list($id): void
+    public function listAccommodation($id): void
     {
         $view = new View('user:list-accommodation');
         $accommodations = RepoManager::getRM()->getAccommodationRepo()->getByOwnerId($id);

@@ -52,7 +52,7 @@ class RentalController extends Controller
     }
 
     // On va afficher la liste des locations pour un utilisateur connecté en reconvertissant les dates en string
-    public function list(int $id): void
+    public function listRental(int $id): void
     {
         $view = new View('user:list-rental');
         $rentals = RepoManager::getRM()->getRentalRepo()->getByUserId($id);
@@ -66,7 +66,22 @@ class RentalController extends Controller
         ];
 
         $view->render($data);
+    }
 
+    // Je veux lister les rentals faite sur les biens de l'utilisateur connecté
+    public function listReserve(): void
+    {
+        $view = new View('user:list-who-reserve');
+        $rentals = RepoManager::getRM()->getRentalRepo()->getAllForOwner($_SESSION['user']->getId());
+        foreach ($rentals as $rental) {
+            $rental->setDateStart($rental->getDateStart());
+            $rental->setDateEnd($rental->getDateEnd());
+        }
+        $data = [
+            'title' => 'Mes locations de biens',
+            'rentals' => $rentals
+        ];
+
+        $view->render($data);
     }
 }
-
