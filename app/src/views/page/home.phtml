@@ -42,16 +42,14 @@ if ($firstname != ''): ?>
         <div class="accommodations-list">
             <?php foreach ($accommodations as $accommodation): ?>
                 <div class="accommodation-item">
-                    <p>
+                    <img src="/image/<?php echo htmlspecialchars($accommodation->getImage()); ?>" alt="Image du logement">
                     <ul>
                         <li>Pays : <?php echo $accommodation->getAdress()->getCity() ?></li>
                         <li>Ville : <?php echo $accommodation->getAdress()->getCountry() ?></li>
                         <li>Prix : <?php echo $accommodation->getPrice() ?> /nuit</li>
-                        <li>id_type : <?php echo $accommodation->getIdType() ?></li>
                         <li>Taille : <?php echo $accommodation->getSize() ?> /m²</li>
                         <li>Description : <?php echo $accommodation->getDescription() ?></li>
                         <li>Couchages : <?php echo $accommodation->getBeds() ?></li>
-                        <li>image : <?php echo $accommodation->getImage() ?> </li>
                         <li>
                             <?php if (isset($_SESSION['user'])): ?>
                                 <button><a href="/users/create-rental/<?php echo $accommodation->getId() ?>" class="protected-link">Louer</a></button>
@@ -60,7 +58,6 @@ if ($firstname != ''): ?>
                             <?php endif; ?>
                         </li>
                     </ul>
-                    </p>
                 </div>
             <?php endforeach ?>
         </div>

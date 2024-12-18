@@ -35,6 +35,32 @@ class AccommodationController extends Controller
             'postal_code' => $accommodation_data['postal_code']
         ];
 
+
+        // 3. Gérer l'upload d'image
+        $image_name = null;
+        if (!empty($_FILES['image']['name'])) {
+            $image = $_FILES['image']['name'];
+            $format = $_FILES['image']['type'];
+            $tmp_name = $_FILES['image']['tmp_name'];
+            $dir_name = __DIR__ . '/../../public/image/';
+
+            if (!in_array($format, ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'])) {
+                echo "Erreur : Format d'image non pris en charge.";
+                return;
+            }
+
+            // Nom unique pour l'image
+            $image_name = substr(uniqid() . '_' . $image, 0, 100);
+
+            if (!move_uploaded_file($tmp_name, $dir_name . $image_name)) {
+                echo "Erreur : Impossible de déplacer l'image.";
+                return;
+            }
+        }
+
+        // Si aucune image n'est fournie, définir une valeur par défaut (par exemple, une image générique)
+        $image_name = $image_name ?? ''; // Si $image_name est null, on utilise une chaîne vide
+
         $adress_id = RepoManager::getRM()->getAdresseRepo()->create($data_adress);
         $data_accommodation = [
             'adresse_id' => $adress_id,
@@ -43,7 +69,8 @@ class AccommodationController extends Controller
             'size' => $accommodation_data['size'],
             'description' => $accommodation_data['description'],
             'beds' => $accommodation_data['beds'],
-            'owner_id' => $_SESSION['user']->getId()
+            'owner_id' => $_SESSION['user']->getId(),
+            'image' => $image_name
         ];
 
         $accommodation = RepoManager::getRM()->getAccommodationRepo()->create($data_accommodation);

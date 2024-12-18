@@ -32,8 +32,8 @@ class AccommodationRepository extends Repository
         }
 
         // 1. Insérer les données de accommodation dans la table accommodations
-        $queryAccommodation = 'INSERT INTO accommodations (adresse_id, price, id_type, size, description, beds, owner_id)
-        VALUES (:adresse_id, :price, :id_type, :size, :description, :beds, :owner_id)';
+        $queryAccommodation = 'INSERT INTO accommodations (adresse_id, price, id_type, size, description, beds, owner_id, image)
+        VALUES (:adresse_id, :price, :id_type, :size, :description, :beds, :owner_id, :image)';
         $stmtAccommodation = $this->pdo->prepare($queryAccommodation);
         $stmtAccommodation->execute($accommodation);
 
