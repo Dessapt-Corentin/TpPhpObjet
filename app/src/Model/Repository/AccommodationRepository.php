@@ -117,7 +117,6 @@ class AccommodationRepository extends Repository
         return $categories;
     }
 
-    /* Delete toutes les liaisons de catégories d'une voiture donnée */
     public function detachAllForAccommodation(int $id): bool
     {
         $query = sprintf(
@@ -132,7 +131,7 @@ class AccommodationRepository extends Repository
         $success = $sth->execute(['id' => $id]);
         return $success;
     }
-    /* Insére les liaisons de catégories demandée pour d'une voiture donnée */
+
     public function attachForAccommodation(array $ids_equipments, int $accommodation_id): bool
     {
         $query_values = [];
@@ -154,4 +153,7 @@ class AccommodationRepository extends Repository
         }
         return $sth->execute();
     }
+
+    
+
 }

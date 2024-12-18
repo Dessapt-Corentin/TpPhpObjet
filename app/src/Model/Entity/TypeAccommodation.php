@@ -23,4 +23,5 @@ class TypeAccommodation extends Entity
         $this->type_accommodation = $type_accommodation;
         return $this;
     }
+
 }

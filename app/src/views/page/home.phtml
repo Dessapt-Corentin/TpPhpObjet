@@ -44,11 +44,10 @@ if ($firstname != ''): ?>
                 <div class="accommodation-item">
                     <img src="/image/<?php echo htmlspecialchars($accommodation->getImage()); ?>" alt="Image du logement">
                     <ul>
-                        <li>Pays : <?php echo $accommodation->getAdress()->getCity() ?></li>
-                        <li>Ville : <?php echo $accommodation->getAdress()->getCountry() ?></li>
+                        <li>Pays : <?php echo $accommodation->getAdress()->getCountry() ?></li>
+                        <li>Ville : <?php echo $accommodation->getAdress()->getCity() ?></li>
                         <li>Prix : <?php echo $accommodation->getPrice() ?> /nuit</li>
                         <li>Taille : <?php echo $accommodation->getSize() ?> /m²</li>
-                        <li>Description : <?php echo $accommodation->getDescription() ?></li>
                         <li>Couchages : <?php echo $accommodation->getBeds() ?></li>
                         <li>
                             <?php if (isset($_SESSION['user'])): ?>

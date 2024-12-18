@@ -4,6 +4,28 @@
     </div>
 </nav>
 
+<div >
+    <div class="accommodations-list">
+        <div class="accommodation-item4">
+            <img src="/image/<?php echo htmlspecialchars($accommodation->getImage()); ?>" alt="Image du logement">
+            <ul>
+                <li>Type de bien : <?php echo $accommodation->getType()->getTypeAccommodation() ?></li>
+                <li>Description : <?php echo $accommodation->getDescription() ?></li>
+                <li>Pays : <?php echo $accommodation->getAdress()->getCity() ?></li>
+                <li>Ville : <?php echo $accommodation->getAdress()->getCountry() ?></li>
+                <li>Adresse : <?php echo $accommodation->getAdress()->getAdress() ?></li>
+                <li>Code postal : <?php echo $accommodation->getAdress()->getPostalCode() ?></li>
+                <li>Prix : <?php echo $accommodation->getPrice() ?> /nuit</li>
+                <li>Taille : <?php echo $accommodation->getSize() ?> /m²</li>
+                <li>Equipements : <?php echo implode(', ', array_map(function($equipment) { return $equipment->getEquipment(); }, $accommodation->getEquipments())) ?></li>
+                <li>Couchages : <?php echo $accommodation->getBeds() ?></li>
+                <li>Propriétaire : <?php echo $accommodation->getOwner()->getFirstname() . ' ' . $accommodation->getOwner()->getLastname() ?></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
 <form action="/users/create-rental/<?php echo $accommodation->getId(); ?>" method="post" novalidate>
     <h2>Formulaire de location</h2>
 

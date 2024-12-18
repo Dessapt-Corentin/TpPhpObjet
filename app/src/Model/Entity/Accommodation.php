@@ -154,7 +154,37 @@ class Accommodation extends Entity
         return $this;
     }
 
+    // Liaison avec la table type
+    protected TypeAccommodation $type;
+    public function getType(): TypeAccommodation
+    {
+        if (!isset($this->type)) {
+            $this->type = RepoManager::getRM()->getTypeAccommodationRepo()->getById($this->id_type);
+        }
+        return $this->type;
+    }
 
+    public function setType(TypeAccommodation $type): self
+    {
+        $this->type = $type;
+        return $this;
+    }
+
+    // Liaison avec la table user
+    protected User $owner;
+    public function getOwner(): User
+    {
+        if (!isset($this->owner)) {
+            $this->owner = RepoManager::getRM()->getUserRepo()->getById($this->owner_id);
+        }
+        return $this->owner;
+    }
+
+    public function setOwner(User $owner): self
+    {
+        $this->owner = $owner;
+        return $this;
+    }
 
     // Liaison avec la table equipment
     protected array $equipments;
